@@ -1,6 +1,5 @@
 package Boundary.Funcionario;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,7 +49,7 @@ public class CrudBilhete extends Application{
 	}
 	
 	private void iniciarAtributos() {
-		tblBilhete = new TableView();
+		tblBilhete = new TableView<Bilhete>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -90,7 +88,7 @@ public class CrudBilhete extends Application{
 	}
 	
 	private void preencherTabela() {
-	    List<Bilhete> bilhetes = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Bilhete teste1 = new Bilhete();

@@ -8,7 +8,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -48,7 +47,7 @@ public class CrudAviao extends Application {
 	}
 	
 	private void iniciarAtributos() {
-		tblAviao = new TableView();
+		tblAviao = new TableView<Aviao>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -80,7 +79,7 @@ public class CrudAviao extends Application {
 	}
 	
 	private void preencherTabela() {
-	    List<Aviao> avioes = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Aviao> avioes = new ArrayList<Aviao>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Aviao teste1 = new Aviao();

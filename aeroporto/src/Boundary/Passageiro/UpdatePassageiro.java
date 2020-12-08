@@ -1,6 +1,6 @@
 package Boundary.Passageiro;
 
-import Boundary.Entrada;
+import Entity.Passageiro;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,9 +29,9 @@ public class UpdatePassageiro extends Application {
 		Label lblLogin = new Label("Login:");
 		Label lblNome = new Label("Nome:");
 		Label lblDocumento = new Label("Documento:");
-		Label lblNumeroCartao = new Label("Login:");
-		Label lblTelefone = new Label("Login:");
-		Label lblNascimento = new Label("Login:");
+		Label lblNumeroCartao = new Label("Numero do Cartão:");
+		Label lblTelefone = new Label("Telefone:");
+		Label lblNascimento = new Label("Nascimento:");
 		//colocar endereço
 		Label lblSenha = new Label("Senha:");
 		
@@ -40,7 +41,7 @@ public class UpdatePassageiro extends Application {
 		TextField txtDocumento = new TextField();
 		TextField txtNumeroCartao = new TextField();
 		TextField txtTelefone = new TextField();
-		TextField txtNascimento = new TextField();
+		DatePicker dtpNascimento = new DatePicker();
 		PasswordField txtSenha = new PasswordField();
 		
         Button btnAtualizar = new Button("Atualizar");
@@ -52,10 +53,41 @@ public class UpdatePassageiro extends Application {
         btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //ir para tela de signUp
-            	stage.hide();
+            	if (!txtId.getText().equals("") && !txtLogin.getText().equals("") &&
+            			!txtNome.getText().equals("") && !txtDocumento.getText().equals("") &&
+            			!txtNumeroCartao.getText().equals("") && !txtTelefone.getText().equals("") &&
+            			!txtSenha.getText().equals("")) {
+            		Passageiro newPassageiro = new Passageiro();
+            		
+            		newPassageiro.setId(Integer.parseInt(txtId.getText()));
+            		newPassageiro.setUsuario(txtLogin.getText());
+            		newPassageiro.setNome(txtNome.getText());
+            		newPassageiro.setDocumento(txtDocumento.getText());
+            		newPassageiro.setNumeroCartao(txtNumeroCartao.getText());
+            		newPassageiro.setTeleone(txtTelefone.getText());		//mudar para telefone
+            		newPassageiro.setDataNascimento(dtpNascimento.getValue());
+            		newPassageiro.setSenha(txtSenha.getText());
+            		
+            		realizarUpdate(newPassageiro);
+            		
+            		stage.hide();
+            		//tela exibindo mensagem
+            	} else {
+            		//tela erro
+            	}
             }
         });
+                
+        Passageiro oldPassageiro = new Passageiro(); //receber valores do current user aqui
+
+        txtId.setText(String.valueOf(oldPassageiro.getId()));
+        txtLogin.setText(oldPassageiro.getUsuario());
+        txtNome.setText(oldPassageiro.getNome());
+        txtDocumento.setText(oldPassageiro.getDocumento());
+        txtNumeroCartao.setText(oldPassageiro.getNumeroCartao());
+        txtTelefone.setText(oldPassageiro.getTeleone());
+        dtpNascimento.setValue(oldPassageiro.getDataNascimento());
+        txtSenha.setText(oldPassageiro.getSenha());
         
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -75,7 +107,7 @@ public class UpdatePassageiro extends Application {
         grid.add(lblTelefone, 3, 4);
         grid.add(txtTelefone, 4, 4);
         grid.add(lblNascimento, 1, 5);
-        grid.add(txtNascimento, 2, 5);
+        grid.add(dtpNascimento, 2, 5);
         grid.add(lblSenha, 3, 5);
         grid.add(txtSenha, 4, 5);
         grid.add(btnAtualizar, 1, 6, 4, 1);
@@ -85,8 +117,12 @@ public class UpdatePassageiro extends Application {
         GridPane.setHalignment(titulo, HPos.CENTER);
 		
 		stage.setResizable(false);
-		stage.setScene(new Scene(grid, 450, 220));
+		stage.setScene(new Scene(grid, 545, 220));
 		stage.show();		
+	}
+	
+	private void realizarUpdate(Passageiro passageiro) {
+		//lógica de update aqui
 	}
 
 }

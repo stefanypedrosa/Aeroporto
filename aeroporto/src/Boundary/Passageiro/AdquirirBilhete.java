@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entity.Bilhete;
+import Entity.SituacaoBilhete;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,6 +31,8 @@ public class AdquirirBilhete extends Application {
 		
 	private Scene scene;
 	
+	private Bilhete selectedBilhete;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Bilhetes");
@@ -42,7 +47,7 @@ public class AdquirirBilhete extends Application {
 	}
 	
 	private void iniciarAtributos() {
-		tblBilhete = new TableView();
+		tblBilhete = new TableView<Bilhete>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -71,7 +76,7 @@ public class AdquirirBilhete extends Application {
 	}
 	
 	private void preencherTabela() {
-	    List<Bilhete> bilhetes = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Bilhete teste1 = new Bilhete();
@@ -95,8 +100,30 @@ public class AdquirirBilhete extends Application {
 	    
 	    //Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
-	    	//colocar aqui para selecionar vaga na memória
+	    	selectedBilhete = newSelection;
 	    });
+	    
+	    btnComprar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete() == SituacaoBilhete.DISPONIVEL) {
+            		realizarCompra();
+            	} else {
+            		//tela erro;
+            	}
+            }
+        });
+	    
+	    btnReservar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete() == SituacaoBilhete.DISPONIVEL) {
+            		realizarReserva();
+            	} else {
+            		//tela erro;
+            	}
+            }
+        });
 	}
 	
 	private void definirLayout() {
@@ -115,6 +142,14 @@ public class AdquirirBilhete extends Application {
 	    grid.add(btnReservar, 1, 3);
 
 	    scene = new Scene(grid, 250, 245);
+	}
+	
+	private void realizarCompra() {
+		//lógica de compra
+	}
+	
+	private void realizarReserva() {
+		//lógica de reserva
 	}
 	
 }

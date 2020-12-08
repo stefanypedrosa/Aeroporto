@@ -1,10 +1,7 @@
 package Boundary.Funcionario;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import Entity.Passageiro;
@@ -42,7 +39,7 @@ public class CrudPassageiro extends Application {
 	private TextField txtNumeroCartao;
 	private TextField txtTelefone;
 	private DatePicker dtpDataNascimento;
-	private TextField txtEndereco;
+//	private TextField txtEndereco;
 	private TextField txtSenha;
 	
 	private Button btnAdicionar;
@@ -65,7 +62,7 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void iniciarAtributos() {
-		tblPassageiro = new TableView();
+		tblPassageiro = new TableView<Passageiro>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -134,7 +131,7 @@ public class CrudPassageiro extends Application {
 	private void preencherTabela() {
 		//ADICIONAR ENDEREÇO DEPOIS
 	    
-	    List<Passageiro> passageiros = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Passageiro> passageiros = new ArrayList<Passageiro>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Passageiro teste1 = new Passageiro();

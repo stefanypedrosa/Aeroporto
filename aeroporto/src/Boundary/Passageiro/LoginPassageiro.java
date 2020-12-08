@@ -1,7 +1,6 @@
 package Boundary.Passageiro;
 
 import Boundary.Entrada;
-import Boundary.Funcionario.MenuFuncionario;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,15 +41,23 @@ public class LoginPassageiro extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //ir para tela de passageiro
-            	MenuPassageiro menuPassageiro = new MenuPassageiro();
-            	try {
-            		Stage newStage = new Stage();
-					menuPassageiro.start(newStage);
-					stage.hide();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+            	if (!txtLogin.getText().equals("") && !txtSenha.getText().equals("")) {
+            		if (login(txtLogin.getText(), txtSenha.getText())) {
+    	            	MenuPassageiro menuPassageiro = new MenuPassageiro();
+    	            	try {
+    	            		Stage newStage = new Stage();
+    						menuPassageiro.start(newStage);
+    						stage.hide();
+    					} catch (Exception e) {
+    						// TODO Auto-generated catch block
+    						e.printStackTrace();
+    					}
+                	} else {
+                		//tela de erro
+                	}
+            	} else {
+            		//tela erro
+            	}
             }
         });
         
@@ -104,6 +111,11 @@ public class LoginPassageiro extends Application {
 		stage.setResizable(false);
 		stage.setScene(new Scene(grid, 225, 185));
 		stage.show();		
+	}
+	
+	private boolean login(String username, String password) {
+		//adicionar aqui lógica do login
+		return true;
 	}
 
 }

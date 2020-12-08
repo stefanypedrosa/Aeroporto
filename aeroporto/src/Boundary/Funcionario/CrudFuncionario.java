@@ -62,7 +62,7 @@ public class CrudFuncionario extends Application {
 	}
 	
 	private void iniciarAtributos() {
-		tblFuncionario = new TableView();
+		tblFuncionario = new TableView<Funcionario>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -131,7 +131,7 @@ public class CrudFuncionario extends Application {
 	private void preencherTabela() {
 		//ADICIONAR ENDEREÇO DEPOIS
 	    
-	    List<Funcionario> funcionarios = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Funcionario> funcionarios = new ArrayList<Funcionario>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Funcionario teste1 = new Funcionario();

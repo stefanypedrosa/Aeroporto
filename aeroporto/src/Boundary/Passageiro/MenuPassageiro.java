@@ -1,10 +1,5 @@
 package Boundary.Passageiro;
 
-import Boundary.Funcionario.CrudAviao;
-import Boundary.Funcionario.CrudBilhete;
-import Boundary.Funcionario.CrudFuncionario;
-import Boundary.Funcionario.CrudHorario;
-import Boundary.Funcionario.CrudPassageiro;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

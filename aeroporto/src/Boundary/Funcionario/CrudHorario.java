@@ -51,7 +51,7 @@ public class CrudHorario extends Application{
 	}
 	
 	private void iniciarAtributos() {
-		tblHorario = new TableView();
+		tblHorario = new TableView<Horario>();
 
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -88,7 +88,7 @@ public class CrudHorario extends Application{
 	}
 	
 	private void preencherTabela() {
-	    List<Horario> horarios = new ArrayList();	//já puxar os valores do getAll aqui
+	    List<Horario> horarios = new ArrayList<Horario>();	//já puxar os valores do getAll aqui
 
 	    //valores de teste -- começo
 	    Horario teste1 = new Horario();

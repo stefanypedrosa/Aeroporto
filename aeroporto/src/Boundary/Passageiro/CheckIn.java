@@ -3,8 +3,12 @@ package Boundary.Passageiro;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entity.Bagagem;
 import Entity.Bilhete;
+import Entity.SituacaoBilhete;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -57,7 +61,7 @@ private TableView<Bilhete> tblBilhete;
 	    tcAssento.setCellValueFactory(new PropertyValueFactory<>("assento"));
 	    
 	    tcSituacao = new TableColumn<>("Situacao");
-	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("assento"));		//trocar para situacao depois
+	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("situacaoBilhete"));		//trocar para situacao depois
 	    
 	    txtId = new TextField();
 	    txtPeso = new TextField();
@@ -76,24 +80,43 @@ private TableView<Bilhete> tblBilhete;
 	    tblBilhete.getColumns().add(tcAssento);
 	    tblBilhete.getColumns().add(tcSituacao);
 	    
-	    int[] vetor = new int[10];
-	    vetor[8] = 2;
+	    btnCheckIn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //ir para tela de signUp
+            	if (!txtId.getText().equals("") && !txtPeso.getText().equals("")) {
+	            	Bagagem bagagem = new Bagagem();
+	            	try {
+	            		bagagem.setId(Integer.parseInt(txtId.getText()));
+	            		bagagem.setPeso(Double.parseDouble(txtPeso.getText()));
+	            		realizarCheckIn(bagagem);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            	} else {
+            		//tela de erro
+            	}
+            }
+        });
 	}
 	
 	private void preencherTabela() {
 	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
 
-	    //valores de teste -- começo
+	    //valores de teste -- começo ----------------- receber valores reais aqui
 	    Bilhete teste1 = new Bilhete();
 	    Bilhete teste2 = new Bilhete();
 	    
 	    teste1.setId(1);
 	    teste1.setNumero(1);
 	    teste1.setAssento("1");
+	    teste1.setSituacaoBilhete(SituacaoBilhete.RESERVADO);
 	    
 	    teste2.setId(2);
 	    teste2.setNumero(2);
 	    teste2.setAssento("2");
+	    teste1.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
 	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);
@@ -105,7 +128,7 @@ private TableView<Bilhete> tblBilhete;
 	    
 	    //Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
-	    	//get selected
+	    	//get selected para inserir bagagem
 	    });
 	}
 	
@@ -125,6 +148,10 @@ private TableView<Bilhete> tblBilhete;
 	    grid.add(btnCheckIn, 1, 3, 2, 1);
 
 	    scene = new Scene(grid, 320, 480);
+	}
+	
+	private void realizarCheckIn(Bagagem bagagem) {
+		//colocar aqui lógica do checkIn
 	}
 
 }

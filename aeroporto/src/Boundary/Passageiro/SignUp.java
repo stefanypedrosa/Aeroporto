@@ -1,6 +1,7 @@
 package Boundary.Passageiro;
 
 import Boundary.Entrada;
+import Entity.Passageiro;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,11 +30,12 @@ public class SignUp extends Application {
 		Label lblLogin = new Label("Login:");
 		Label lblNome = new Label("Nome:");
 		Label lblDocumento = new Label("Documento:");
-		Label lblNumeroCartao = new Label("Login:");
-		Label lblTelefone = new Label("Login:");
-		Label lblNascimento = new Label("Login:");
+		Label lblNumeroCartao = new Label("Número do Cartão:");
+		Label lblTelefone = new Label("Telefone:");
+		Label lblNascimento = new Label("Data de nascimento:");
 		//colocar endereço
 		Label lblSenha = new Label("Senha:");
+		Label lblConfirmarSenha = new Label("Confirmar Senha:");
 		
 		TextField txtId = new TextField();
 		TextField txtLogin = new TextField();
@@ -40,8 +43,9 @@ public class SignUp extends Application {
 		TextField txtDocumento = new TextField();
 		TextField txtNumeroCartao = new TextField();
 		TextField txtTelefone = new TextField();
-		TextField txtNascimento = new TextField();
+		DatePicker dtpNascimento = new DatePicker();
 		PasswordField txtSenha = new PasswordField();
+		PasswordField txtConfirmarSenha = new PasswordField();
 		
         Button btnCadastrar = new Button("Cadastrar");
         Button btnVoltar = new Button("Voltar");
@@ -53,6 +57,34 @@ public class SignUp extends Application {
         btnVoltar.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnCadastrar.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
+        btnCadastrar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //ir para tela de signUp
+            	if (!txtId.getText().equals("") && !txtLogin.getText().equals("") &&
+            			!txtNome.getText().equals("") && !txtDocumento.getText().equals("") &&
+            			!txtNumeroCartao.getText().equals("") && !txtTelefone.getText().equals("") &&
+            			!txtSenha.getText().equals("") && txtSenha.getText().equals(txtConfirmarSenha.getText())) {
+            		Passageiro newPassageiro = new Passageiro();
+            		
+            		newPassageiro.setId(Integer.parseInt(txtId.getText()));
+            		newPassageiro.setUsuario(txtLogin.getText());
+            		newPassageiro.setNome(txtNome.getText());
+            		newPassageiro.setDocumento(txtDocumento.getText());
+            		newPassageiro.setNumeroCartao(txtNumeroCartao.getText());
+            		newPassageiro.setTeleone(txtTelefone.getText());		//mudar para telefone
+            		newPassageiro.setDataNascimento(dtpNascimento.getValue());
+            		newPassageiro.setSenha(txtSenha.getText());
+            		
+            		realizarSignUp(newPassageiro);
+            		
+            		//tela exibindo mensagem
+            	} else {
+            		//tela erro
+            	}
+            }
+        });
+        
         btnEntrar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -61,22 +93,6 @@ public class SignUp extends Application {
             	try {
             		Stage newStage = new Stage();
 					loginPassageiro.start(newStage);
-					stage.hide();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        });
-        
-        btnCadastrar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //ir para tela de signUp
-            	SignUp signUp = new SignUp();
-            	try {
-            		Stage newStage = new Stage();
-					signUp.start(newStage);
 					stage.hide();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -119,20 +135,26 @@ public class SignUp extends Application {
         grid.add(lblTelefone, 3, 4);
         grid.add(txtTelefone, 4, 4);
         grid.add(lblNascimento, 1, 5);
-        grid.add(txtNascimento, 2, 5);
+        grid.add(dtpNascimento, 2, 5);
         grid.add(lblSenha, 3, 5);
         grid.add(txtSenha, 4, 5);
-        grid.add(btnVoltar, 1, 6, 2, 1);
-        grid.add(btnCadastrar, 3, 6, 2, 1);
-        grid.add(btnEntrar, 1, 7, 4, 1);
+        grid.add(lblConfirmarSenha, 1, 6);
+        grid.add(txtConfirmarSenha, 2, 6);
+        grid.add(btnVoltar, 1, 7, 2, 1);
+        grid.add(btnCadastrar, 3, 7, 2, 1);
+        grid.add(btnEntrar, 1, 8, 4, 1);
         
         grid.setPadding(new Insets(0, 5, 0, 0));
         
         GridPane.setHalignment(titulo, HPos.CENTER);
 		
 		stage.setResizable(false);
-		stage.setScene(new Scene(grid, 450, 250));
+		stage.setScene(new Scene(grid, 575, 250));
 		stage.show();		
+	}
+	
+	private void realizarSignUp(Passageiro passageiro) {
+		//puxar método de signUp aqui
 	}
 
 }
