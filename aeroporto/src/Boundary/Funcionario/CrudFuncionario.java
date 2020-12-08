@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Funcionario;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -28,7 +31,6 @@ public class CrudFuncionario extends Application {
 	private TableColumn<Funcionario, String> tcContaCorrente;
 	private TableColumn<Funcionario, String> tcTelefone;
 	private TableColumn<Funcionario, String> tcDataNascimento;
-	private TableColumn<Funcionario, String> tcEndereco;
 	private TableColumn<Funcionario, String> tcSenha;
 	
 	TextField txtId;
@@ -39,7 +41,6 @@ public class CrudFuncionario extends Application {
 	TextField txtContaCorrente;
 	TextField txtTelefone;
 	DatePicker dtpDataNascimento;
-	TextField txtEndereco;
 	TextField txtSenha;
 	
 	Button btnAdicionar;
@@ -88,9 +89,6 @@ public class CrudFuncionario extends Application {
 	    tcDataNascimento = new TableColumn<>("Data de nascimento");
 	    tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
 	    
-	    tcEndereco = new TableColumn<>("Endereço");
-	    tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
-	    
 	    tcSenha = new TableColumn<>("Senha");
 	    tcSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
 	    
@@ -126,6 +124,54 @@ public class CrudFuncionario extends Application {
 	    tblFuncionario.getColumns().add(tcTelefone);
 	    tblFuncionario.getColumns().add(tcDataNascimento);
 	    tblFuncionario.getColumns().add(tcSenha);
+	    
+	    btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Funcionario funcionario = transformarObjeto();
+	            	realizarInsert(funcionario);
+	            } else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+	            }
+            	
+            }
+        });
+        
+        btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Funcionario funcionario = transformarObjeto();
+	            	realizarUpdate(funcionario);
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
+        btnRemover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Funcionario funcionario = transformarObjeto();
+	            	realizarDelete(funcionario.getId());
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um funcionário para remover");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
 	}
 	
 	private void preencherTabela() {
@@ -155,6 +201,7 @@ public class CrudFuncionario extends Application {
 	    teste2.setContaCorrente("222222222");
 	    teste2.setTeleone("99");
 	    teste2.setDataNascimento(LocalDate.now());
+	    
 	    teste2.setSenha("bbbbbbbb");
 	    
 	    funcionarios.add(teste1);
@@ -204,6 +251,42 @@ public class CrudFuncionario extends Application {
 	    grid.add(btnRemover, 4, 4);
 
 	    scene = new Scene(grid, 725, 510);
+	}
+	
+	private Funcionario transformarObjeto() {
+		Funcionario retornoFuncionario = new Funcionario();
+		retornoFuncionario.setId(Long.parseLong(txtId.getText()));
+		retornoFuncionario.setUsuario(txtUsuario.getText());
+		retornoFuncionario.setNome(txtNome.getText());
+		retornoFuncionario.setCodigo(txtCodigo.getText());
+		retornoFuncionario.setContaCorrente(txtContaCorrente.getText());
+		retornoFuncionario.setUsuario(txtTelefone.getText());
+		retornoFuncionario.setUsuario(txtSenha.getText());
+		
+		return retornoFuncionario;
+	}
+	
+	private boolean validarCampos() {
+		if (!txtId.getText().equals("") && !txtUsuario.getText().equals("") &&
+    			!txtNome.getText().equals("") && !txtCodigo.getText().equals("") &&
+    			!txtContaCorrente.getText().equals("") && !txtTelefone.getText().equals("") &&
+    			!txtSenha.getText().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void realizarInsert(Funcionario funcionario) {
+		//puxar insert da controller
+	}
+	
+	private void realizarUpdate(Funcionario funcionario) {
+		//puxar update
+	}
+
+	private void realizarDelete(Long funcionarioId) {
+		//puxar delete
 	}
 	
 }

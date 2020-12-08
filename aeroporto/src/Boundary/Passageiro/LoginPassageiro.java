@@ -1,6 +1,7 @@
 package Boundary.Passageiro;
 
 import Boundary.Entrada;
+import Boundary.Mensagem;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -53,10 +54,14 @@ public class LoginPassageiro extends Application {
     						e.printStackTrace();
     					}
                 	} else {
-                		//tela de erro
+                		Stage newStage = new Stage();
+                		Mensagem mensagem = new Mensagem("Login incorreto");
+                		mensagem.start(newStage);
                 	}
             	} else {
-            		//tela erro
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
             	}
             }
         });

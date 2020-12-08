@@ -1,6 +1,7 @@
 package Boundary.Funcionario;
 
 import Boundary.Entrada;
+import Boundary.Mensagem;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,15 +40,27 @@ public class LoginFuncionario extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //ir para tela de funcionário
-            	MenuFuncionario menuFuncionario = new MenuFuncionario();
-            	try {
+            	if (!txtLogin.getText().equals("") && !txtSenha.getText().equals("")) {
+            		if (login(txtLogin.getText(), txtSenha.getText())) {
+    	            	MenuFuncionario menuFuncionario = new MenuFuncionario();
+    	            	try {
+    	            		Stage newStage = new Stage();
+    						menuFuncionario.start(newStage);
+    						stage.hide();
+    					} catch (Exception e) {
+    						// TODO Auto-generated catch block
+    						e.printStackTrace();
+    					}
+                	} else {
+                		Stage newStage = new Stage();
+                		Mensagem mensagem = new Mensagem("Login incorreto");
+                		mensagem.start(newStage);
+                	}
+            	} else {
             		Stage newStage = new Stage();
-					menuFuncionario.start(newStage);
-					stage.hide();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+            	}
             }
         });
         
@@ -85,6 +98,11 @@ public class LoginFuncionario extends Application {
 		stage.setResizable(false);
 		stage.setScene(new Scene(grid, 225, 180));
 		stage.show();		
+	}
+	
+	private boolean login(String username, String password) {
+		//adicionar aqui lógica do login
+		return true;
 	}
 
 }

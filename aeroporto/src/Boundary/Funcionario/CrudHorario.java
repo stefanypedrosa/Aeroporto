@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Horario;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -85,6 +88,54 @@ public class CrudHorario extends Application{
 	    tblHorario.getColumns().add(tcCodigo);
 	    tblHorario.getColumns().add(tcChegada);
 	    tblHorario.getColumns().add(tcPartida);
+	    
+        btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Horario horario = transformarObjeto();
+	            	realizarInsert(horario);
+	            } else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+	            }
+            	
+            }
+        });
+        
+        btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Horario horario = transformarObjeto();
+	            	realizarUpdate(horario);
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
+        btnRemover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Horario horario = transformarObjeto();
+	            	realizarDelete(horario.getId());
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um horário para remover");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
 	}
 	
 	private void preencherTabela() {
@@ -143,6 +194,36 @@ public class CrudHorario extends Application{
 	    grid.add(btnRemover, 4, 3);
 
 	    scene = new Scene(grid, 420, 480);
+	}
+	
+	private Horario transformarObjeto() {
+		Horario retornoHorario = new Horario();
+		retornoHorario.setId(Long.parseLong(txtId.getText()));
+		retornoHorario.setCodigo(txtCodigo.getText());
+		retornoHorario.setChegada(dtpChegada.getValue());
+		retornoHorario.setPartida(dtpPartida.getValue());
+		
+		return retornoHorario;
+	}
+	
+	private boolean validarCampos() {
+		if (!txtId.getText().equals("") && !txtCodigo.getText().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void realizarInsert(Horario horario) {
+		//puxar insert da controller
+	}
+	
+	private void realizarUpdate(Horario horario) {
+		//puxar update
+	}
+
+	private void realizarDelete(Long horarioId) {
+		//puxar delete
 	}
 
 }

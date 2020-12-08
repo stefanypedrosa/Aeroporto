@@ -3,6 +3,7 @@ package Boundary.Passageiro;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Bilhete;
 import Entity.SituacaoBilhete;
 import javafx.application.Application;
@@ -59,7 +60,7 @@ public class AdquirirBilhete extends Application {
 	    tcAssento.setCellValueFactory(new PropertyValueFactory<>("assento"));
 	    
 	    tcSituacao = new TableColumn<>("Situacao");
-	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("assento"));		//trocar para situacao depois
+	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("SituacaoBilhete"));
 	    
 	    btnReservar = new Button("Reservar");
 	    btnComprar = new Button("Comprar");
@@ -85,10 +86,12 @@ public class AdquirirBilhete extends Application {
 	    teste1.setId(1);
 	    teste1.setNumero(1);
 	    teste1.setAssento("1");
+	    teste1.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
 	    
 	    teste2.setId(2);
 	    teste2.setNumero(2);
 	    teste2.setAssento("2");
+	    teste2.setSituacaoBilhete(SituacaoBilhete.VENDIDO);
 	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);
@@ -109,7 +112,9 @@ public class AdquirirBilhete extends Application {
             	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete() == SituacaoBilhete.DISPONIVEL) {
             		realizarCompra();
             	} else {
-            		//tela erro;
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um bilhete válido");
+            		mensagem.start(newStage);
             	}
             }
         });
@@ -120,7 +125,9 @@ public class AdquirirBilhete extends Application {
             	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete() == SituacaoBilhete.DISPONIVEL) {
             		realizarReserva();
             	} else {
-            		//tela erro;
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um bilhete válido");
+            		mensagem.start(newStage);
             	}
             }
         });

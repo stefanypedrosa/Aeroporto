@@ -3,8 +3,11 @@ package Boundary.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Aviao;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -76,12 +79,61 @@ public class CrudAviao extends Application {
 	    tblAviao.getColumns().add(tcId);
 	    tblAviao.getColumns().add(tcCodigo);
 	    tblAviao.getColumns().add(tcVagas);
+	    
+        btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Aviao aviao = transformarObjeto();
+	            	realizarInsert(aviao);
+	            } else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+	            }
+            	
+            }
+        });
+        
+        btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Aviao aviao = transformarObjeto();
+	            	realizarUpdate(aviao);
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
+        btnRemover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Aviao aviao = transformarObjeto();
+	            	realizarDelete(aviao.getId());
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um avião para remover");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
 	}
 	
 	private void preencherTabela() {
-	    List<Aviao> avioes = new ArrayList<Aviao>();	//já puxar os valores do getAll aqui
+	    List<Aviao> avioes = new ArrayList<>();	//já puxar os valores do getAll aqui
 
-	    //valores de teste -- começo
+	    //valores de teste -- começo -- inserir valores da controller aqui
 	    Aviao teste1 = new Aviao();
 	    Aviao teste2 = new Aviao();
 	    
@@ -130,6 +182,35 @@ public class CrudAviao extends Application {
 	    grid.add(btnRemover, 4, 3);
 
 	    scene = new Scene(grid, 420, 480);
+	}
+	
+	private Aviao transformarObjeto() {
+		Aviao retornoAviao = new Aviao();
+		retornoAviao.setId(Long.parseLong(txtId.getText()));
+		retornoAviao.setCodigo(txtCodigo.getText());
+		retornoAviao.setVagas(Integer.parseInt(txtVagas.getText()));
+		
+		return retornoAviao;
+	}
+	
+	private boolean validarCampos() {
+		if (!txtId.getText().equals("") && !txtCodigo.getText().equals("") && !txtVagas.getText().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void realizarInsert(Aviao aviao) {
+		//puxar insert da controller
+	}
+	
+	private void realizarUpdate(Aviao aviao) {
+		//puxar update
+	}
+
+	private void realizarDelete(Long aviaoId) {
+		//puxar delete
 	}
 	
 }

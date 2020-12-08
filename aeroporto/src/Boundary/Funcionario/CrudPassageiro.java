@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Passageiro;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -126,6 +129,54 @@ public class CrudPassageiro extends Application {
 	    tblPassageiro.getColumns().add(tcTelefone);
 	    tblPassageiro.getColumns().add(tcDataNascimento);
 	    tblPassageiro.getColumns().add(tcSenha);
+	    
+	    btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Passageiro passageiro = transformarObjeto();
+	            	realizarInsert(passageiro);
+	            } else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+	            }
+            	
+            }
+        });
+        
+        btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Passageiro passageiro = transformarObjeto();
+	            	realizarUpdate(passageiro);
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
+        btnRemover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Passageiro passageiro = transformarObjeto();
+	            	realizarDelete(passageiro.getId());
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um passageiro para remover");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
 	}
 	
 	private void preencherTabela() {
@@ -204,6 +255,42 @@ public class CrudPassageiro extends Application {
 	    grid.add(btnRemover, 4, 4);
 
 	    scene = new Scene(grid, 740, 510);
+	}
+	
+	private Passageiro transformarObjeto() {
+		Passageiro retornoPassageiro = new Passageiro();
+		retornoPassageiro.setId(Long.parseLong(txtId.getText()));
+		retornoPassageiro.setUsuario(txtUsuario.getText());
+		retornoPassageiro.setNome(txtNome.getText());
+		retornoPassageiro.setDocumento(txtDocumento.getText());
+		retornoPassageiro.setNumeroCartao(txtNumeroCartao.getText());
+		retornoPassageiro.setUsuario(txtTelefone.getText());
+		retornoPassageiro.setUsuario(txtSenha.getText());
+		
+		return retornoPassageiro;
+	}
+	
+	private boolean validarCampos() {
+		if (!txtId.getText().equals("") && !txtUsuario.getText().equals("") &&
+    			!txtNome.getText().equals("") && !txtDocumento.getText().equals("") &&
+    			!txtNumeroCartao.getText().equals("") && !txtTelefone.getText().equals("") &&
+    			!txtSenha.getText().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void realizarInsert(Passageiro passageiro) {
+		//puxar insert da controller
+	}
+	
+	private void realizarUpdate(Passageiro passageiro) {
+		//puxar update
+	}
+
+	private void realizarDelete(Long passageiroId) {
+		//puxar delete
 	}
 	
 }

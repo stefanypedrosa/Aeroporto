@@ -3,6 +3,7 @@ package Boundary.Passageiro;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Bagagem;
 import Entity.Bilhete;
 import Entity.SituacaoBilhete;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 
 public class CheckIn extends Application {
 
-private TableView<Bilhete> tblBilhete;
+	private TableView<Bilhete> tblBilhete;
 	
 	private TableColumn<Bilhete, String> tcId;
 	private TableColumn<Bilhete, String> tcNumero;
@@ -34,6 +35,8 @@ private TableView<Bilhete> tblBilhete;
 	private Button btnCheckIn;
 		
 	private Scene scene;
+	
+	private Bilhete selectedBilhete;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -84,18 +87,26 @@ private TableView<Bilhete> tblBilhete;
             @Override
             public void handle(ActionEvent event) {
                 //ir para tela de signUp
-            	if (!txtId.getText().equals("") && !txtPeso.getText().equals("")) {
-	            	Bagagem bagagem = new Bagagem();
-	            	try {
-	            		bagagem.setId(Integer.parseInt(txtId.getText()));
-	            		bagagem.setPeso(Double.parseDouble(txtPeso.getText()));
-	            		realizarCheckIn(bagagem);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+            	if (selectedBilhete != null) {
+            		if (!txtId.getText().equals("") && !txtPeso.getText().equals("")) {
+    	            	Bagagem bagagem = new Bagagem();
+    	            	try {
+    	            		bagagem.setId(Integer.parseInt(txtId.getText()));
+    	            		bagagem.setPeso(Double.parseDouble(txtPeso.getText()));
+    	            		realizarCheckIn(bagagem);
+    					} catch (Exception e) {
+    						// TODO Auto-generated catch block
+    						e.printStackTrace();
+    					}
+                	} else {
+                		Stage newStage = new Stage();
+                		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+                		mensagem.start(newStage);
+                	}
             	} else {
-            		//tela de erro
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um bilhete válido");
+            		mensagem.start(newStage);
             	}
             }
         });
@@ -116,7 +127,7 @@ private TableView<Bilhete> tblBilhete;
 	    teste2.setId(2);
 	    teste2.setNumero(2);
 	    teste2.setAssento("2");
-	    teste1.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
+	    teste2.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
 	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);
@@ -128,7 +139,7 @@ private TableView<Bilhete> tblBilhete;
 	    
 	    //Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
-	    	//get selected para inserir bagagem
+	    	selectedBilhete = newSelection;
 	    });
 	}
 	

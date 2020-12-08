@@ -3,8 +3,12 @@ package Boundary.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
 
+import Boundary.Mensagem;
 import Entity.Bilhete;
+import Entity.SituacaoBilhete;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -85,6 +89,54 @@ public class CrudBilhete extends Application{
 	    tblBilhete.getColumns().add(tcNumero);
 	    tblBilhete.getColumns().add(tcAssento);
 	    tblBilhete.getColumns().add(tcSituacao);
+	    
+	    btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Bilhete bilhete = transformarObjeto();
+	            	realizarInsert(bilhete);
+	            } else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos corretamente");
+            		mensagem.start(newStage);
+	            }
+            	
+            }
+        });
+        
+        btnAtualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+	            	Bilhete bilhete = transformarObjeto();
+	            	realizarUpdate(bilhete);
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos corretamente");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
+        
+        btnRemover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            	if (validarCampos()) {
+            		Bilhete bilhete = transformarObjeto();
+	            	realizarDelete(bilhete.getId());
+            	} else {
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Escolha um bilhete para remover");
+            		mensagem.start(newStage);
+            	}
+            	
+            }
+        });
 	}
 	
 	private void preencherTabela() {
@@ -141,6 +193,48 @@ public class CrudBilhete extends Application{
 	    grid.add(btnRemover, 4, 3);
 
 	    scene = new Scene(grid, 420, 480);
+	}
+	
+	private Bilhete transformarObjeto() {
+		Bilhete bilhete = new Bilhete();
+		bilhete.setId(Long.parseLong(txtId.getText()));
+		bilhete.setNumero(Integer.parseInt(txtNumero.getText()));
+		bilhete.setAssento(txtAssento.getText());
+		switch (txtAssento.getText()) {
+			case "DISPONIVEL":
+				bilhete.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
+				break;
+			case "RESERVADO":
+				bilhete.setSituacaoBilhete(SituacaoBilhete.RESERVADO);
+				break;
+			case "VENDIDO":
+				bilhete.setSituacaoBilhete(SituacaoBilhete.VENDIDO);
+				break;
+		}
+		
+		return bilhete; 
+	}
+	
+	private boolean validarCampos() {
+		if (!txtId.getText().equals("") && !txtNumero.getText().equals("") && !txtAssento.getText().equals("")
+				&& (txtSituacao.getText().equals("DISPONIVEL") || txtSituacao.getText().equals("RESERVADO")
+				|| txtSituacao.getText().equals("VENDIDO"))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void realizarInsert(Bilhete bilhete) {
+		//puxar insert da controller
+	}
+	
+	private void realizarUpdate(Bilhete bilhete) {
+		//puxar update
+	}
+
+	private void realizarDelete(Long bilheteId) {
+		//puxar delete
 	}
 	
 }

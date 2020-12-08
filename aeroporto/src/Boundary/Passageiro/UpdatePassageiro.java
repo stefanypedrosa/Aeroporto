@@ -1,5 +1,7 @@
 package Boundary.Passageiro;
 
+import Boundary.Mensagem;
+import Entity.Endereco;
 import Entity.Passageiro;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -32,7 +34,14 @@ public class UpdatePassageiro extends Application {
 		Label lblNumeroCartao = new Label("Numero do Cartão:");
 		Label lblTelefone = new Label("Telefone:");
 		Label lblNascimento = new Label("Nascimento:");
-		//colocar endereço
+		Label lblIdEndereco = new Label("Id do endereco:");
+		Label lblPais = new Label("País:");
+		Label lblEstado = new Label("Estado:");
+		Label lblCidade = new Label("Cidade:");
+		Label lblBairro = new Label("Bairro:");
+		Label lblRua = new Label("Rua:");
+		Label lblComplemento = new Label("Complemento:");
+		Label lblNumero = new Label("Número:");
 		Label lblSenha = new Label("Senha:");
 		
 		TextField txtId = new TextField();
@@ -42,6 +51,14 @@ public class UpdatePassageiro extends Application {
 		TextField txtNumeroCartao = new TextField();
 		TextField txtTelefone = new TextField();
 		DatePicker dtpNascimento = new DatePicker();
+		TextField txtIdEndereco = new TextField();
+		TextField txtPais = new TextField();
+		TextField txtEstado = new TextField();
+		TextField txtCidade = new TextField();
+		TextField txtBairro = new TextField();
+		TextField txtRua = new TextField();
+		TextField txtComplemento = new TextField();
+		TextField txtNumero = new TextField();
 		PasswordField txtSenha = new PasswordField();
 		
         Button btnAtualizar = new Button("Atualizar");
@@ -58,6 +75,7 @@ public class UpdatePassageiro extends Application {
             			!txtNumeroCartao.getText().equals("") && !txtTelefone.getText().equals("") &&
             			!txtSenha.getText().equals("")) {
             		Passageiro newPassageiro = new Passageiro();
+            		Endereco newEndereco = new Endereco();
             		
             		newPassageiro.setId(Integer.parseInt(txtId.getText()));
             		newPassageiro.setUsuario(txtLogin.getText());
@@ -66,14 +84,28 @@ public class UpdatePassageiro extends Application {
             		newPassageiro.setNumeroCartao(txtNumeroCartao.getText());
             		newPassageiro.setTeleone(txtTelefone.getText());		//mudar para telefone
             		newPassageiro.setDataNascimento(dtpNascimento.getValue());
+            		newEndereco.setId(Integer.parseInt(txtIdEndereco.getText()));
+            		newEndereco.setPais(txtPais.getText());
+            		newEndereco.setEstado(txtEstado.getText());
+            		newEndereco.setCidade(txtCidade.getText());
+            		newEndereco.setBairro(txtBairro.getText());
+            		newEndereco.setRua(txtRua.getText());
+            		newEndereco.setComplemento(txtComplemento.getText());
+            		newEndereco.setNumero(Integer.parseInt(txtNumero.getText()));
+            		newPassageiro.setEndereco(newEndereco);
             		newPassageiro.setSenha(txtSenha.getText());
             		
             		realizarUpdate(newPassageiro);
             		
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Informações atualizada!");
+            		mensagem.start(newStage);
+            		
             		stage.hide();
-            		//tela exibindo mensagem
             	} else {
-            		//tela erro
+            		Stage newStage = new Stage();
+            		Mensagem mensagem = new Mensagem("Preencha todos os campos");
+            		mensagem.start(newStage);
             	}
             }
         });
@@ -108,16 +140,32 @@ public class UpdatePassageiro extends Application {
         grid.add(txtTelefone, 4, 4);
         grid.add(lblNascimento, 1, 5);
         grid.add(dtpNascimento, 2, 5);
-        grid.add(lblSenha, 3, 5);
-        grid.add(txtSenha, 4, 5);
-        grid.add(btnAtualizar, 1, 6, 4, 1);
+        grid.add(lblIdEndereco, 3, 5);
+        grid.add(txtIdEndereco, 4, 5);
+        grid.add(lblPais, 1, 6);
+        grid.add(txtPais, 2, 6);
+        grid.add(lblEstado, 3, 6);
+        grid.add(txtEstado, 4, 6);
+        grid.add(lblCidade, 1, 7);
+        grid.add(txtCidade, 2, 7);
+        grid.add(lblBairro, 3, 7);
+        grid.add(txtBairro, 4, 7);
+        grid.add(lblRua, 1, 8);
+        grid.add(txtRua, 2, 8);
+        grid.add(lblComplemento, 3, 8);
+        grid.add(txtComplemento, 4, 8);
+        grid.add(lblNumero, 1, 9);
+        grid.add(txtNumero, 2, 9);
+        grid.add(lblSenha, 3, 9);
+        grid.add(txtSenha, 4, 9);
+        grid.add(btnAtualizar, 1, 10, 4, 1);
         
         grid.setPadding(new Insets(0, 5, 0, 0));
         
         GridPane.setHalignment(titulo, HPos.CENTER);
 		
 		stage.setResizable(false);
-		stage.setScene(new Scene(grid, 545, 220));
+		stage.setScene(new Scene(grid, 570, 355));
 		stage.show();		
 	}
 	
