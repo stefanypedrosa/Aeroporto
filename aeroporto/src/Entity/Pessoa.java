@@ -6,7 +6,7 @@ public class Pessoa {
 	private long id;
 	private String nome;
 	private String email;
-	private String teleone;
+	private String telefone;
 	private String usuario;
 	private String senha;
 	private LocalDate dataNascimento;
@@ -31,10 +31,10 @@ public class Pessoa {
 		this.email = email;
 	}
 	public String getTeleone() {
-		return teleone;
+		return telefone;
 	}
-	public void setTeleone(String teleone) {
-		this.teleone = teleone;
+	public void setTeleone(String telefone) {
+		this.telefone = telefone;
 	}
 	public String getUsuario() {
 		return usuario;

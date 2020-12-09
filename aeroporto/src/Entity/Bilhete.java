@@ -6,6 +6,8 @@ public class Bilhete {
 	private int numero;
 	private String assento;
 	private SituacaoBilhete situacaoBilhete;
+	private Horario horario;
+	private Passageiro passageiro;
 	
 	
 	public long getId() {
@@ -32,6 +34,19 @@ public class Bilhete {
 	public void setSituacaoBilhete(SituacaoBilhete situacaoBilhete) {
 		this.situacaoBilhete = situacaoBilhete;
 	}
+	public Horario getHorario() {
+		return horario;
+	}
+	public void setHorario(Horario horario) {
+		this.horario = horario;
+	}
+	public Passageiro getPassageiro() {
+		return passageiro;
+	}
+	public void setPassageiro(Passageiro passageiro) {
+		this.passageiro = passageiro;
+	}
+	
 	
 	void reservar(Passageiro passageiro){
 		

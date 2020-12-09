@@ -3,6 +3,7 @@ package Entity;
 public class Funcionario extends Pessoa {
 	private String codigo;
 	private String contaCorrente;
+	private CiaAerea ciaAerea;
 	
 	public String getCodigo() {
 		return codigo;
@@ -15,6 +16,12 @@ public class Funcionario extends Pessoa {
 	}
 	public void setContaCorrente(String contaCorrente) {
 		this.contaCorrente = contaCorrente;
+	}
+	public CiaAerea getCiaAerea() {
+		return ciaAerea;
+	}
+	public void setCiaAerea(CiaAerea ciaAerea) {
+		this.ciaAerea = ciaAerea;
 	}
 	
 	
