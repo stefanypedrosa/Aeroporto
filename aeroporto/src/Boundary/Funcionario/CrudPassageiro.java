@@ -187,7 +187,7 @@ public class CrudPassageiro extends Application {
 	private void preencherTabela() {
 		control.setPassageiro(new Passageiro());
 		try {
-			control.pesquisarPorNome();
+			control.pesquisarTodos();
 		} catch (PassageiroException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,11 +244,12 @@ public class CrudPassageiro extends Application {
 		retornoPassageiro.setId(Long.parseLong(txtId.getText()));
 		retornoPassageiro.setUsuario(txtUsuario.getText());
 		retornoPassageiro.setNome(txtNome.getText());
+		retornoPassageiro.setEmail(txtEmail.getText());
 		retornoPassageiro.setDocumento(txtDocumento.getText());
 		retornoPassageiro.setNumeroCartao(txtNumeroCartao.getText());
-		retornoPassageiro.setUsuario(txtTelefone.getText());
-		retornoPassageiro.setUsuario(txtSenha.getText());
-		
+		retornoPassageiro.setTelefone(txtTelefone.getText());
+		retornoPassageiro.setSenha(txtSenha.getText());
+		retornoPassageiro.setDataNascimento(dtpDataNascimento.getValue());
 		return retornoPassageiro;
 	}
 	
@@ -264,11 +265,25 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void realizarInsert(Passageiro passageiro) {
-		//puxar insert da controller
+		PassageiroControl control = new PassageiroControl();
+		control.setPassageiro(passageiro);
+		try {
+			control.adicionar();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void realizarUpdate(Passageiro passageiro) {
-		//puxar update
+		PassageiroControl control = new PassageiroControl();
+		control.setPassageiro(passageiro);
+		try {
+			control.atualizar();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void realizarDelete(Long passageiroId) {

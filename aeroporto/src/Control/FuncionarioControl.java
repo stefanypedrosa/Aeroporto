@@ -69,6 +69,12 @@ private ObservableList<Funcionario> lista = FXCollections.observableArrayList();
 		this.lista.addAll(Funcionarios);
 	}
 	
+	public void pesquisarTodos() throws FuncionarioException {
+		List<Funcionario> Funcionarios = FuncionarioDAO.pesquisarTodos();
+		this.lista.clear();
+		this.lista.addAll(Funcionarios);
+	}
+	
 	public LongProperty getIdProperty() {
 		return idProperty;
 	}

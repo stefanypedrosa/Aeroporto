@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
+import Control.FuncionarioControl;
 import Entity.Funcionario;
+import Exception.FuncionarioException;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -84,7 +87,7 @@ public class CrudFuncionario extends Application {
 	    tcContaCorrente.setCellValueFactory(new PropertyValueFactory<>("contaCorrente"));
 	    
 	    tcTelefone = new TableColumn<>("Telefone");
-	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("teleone"));	//mudar para telefone
+	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));	//mudar para telefone
 	    
 	    tcDataNascimento = new TableColumn<>("Data de nascimento");
 	    tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
@@ -278,7 +281,14 @@ public class CrudFuncionario extends Application {
 	}
 	
 	private void realizarInsert(Funcionario funcionario) {
-		//puxar insert da controller
+		FuncionarioControl control = new FuncionarioControl();
+		control.setFuncionario(funcionario);
+		try {
+			control.adicionar();
+		} catch (FuncionarioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void realizarUpdate(Funcionario funcionario) {

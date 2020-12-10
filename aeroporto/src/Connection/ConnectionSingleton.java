@@ -8,7 +8,7 @@ public class ConnectionSingleton {
 	
 	private static final String URLCON = "jdbc:mariadb://localhost:3306/aeroportoDB";
 	private static final String USER = "root";
-	private static final String PASS = "";
+	private static final String PASS = "admin";
 	
 	private static ConnectionSingleton instancia = null;
 	private Connection connection = null;
