@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
+import Control.AviaoControl;
 import Entity.Aviao;
+import Exception.AviaoException;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,12 +41,15 @@ public class CrudAviao extends Application {
 		
 	private Scene scene;
 	
+	private AviaoControl control;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Aviões");
 		
 		iniciarAtributos();
 		preencherTabela();
+		adicionarListener();
 		definirLayout();
 		
 		stage.setResizable(false);
@@ -140,31 +146,23 @@ public class CrudAviao extends Application {
 	}
 	
 	private void preencherTabela() {
-	    List<Aviao> avioes = new ArrayList<>();	//já puxar os valores do getAll aqui
-
-	    //valores de teste -- começo -- inserir valores da controller aqui
-	    Aviao teste1 = new Aviao();
-	    Aviao teste2 = new Aviao();
-	    
-	    teste1.setId(1);
-	    teste1.setCodigo("teste1");
-	    teste1.setVagas(10);
-	    teste1.setCiaAerea("azul");
-	    
-	    teste2.setId(2);
-	    teste2.setCodigo("teste2");
-	    teste2.setVagas(25);
-	    teste2.setCiaAerea("gol");
-	    
-	    avioes.add(teste1);
-	    avioes.add(teste2);
-	    //valores de teste -- fim
+	    try {
+	    	control.pesquisarTodos();
+	    } catch (Exception ex) {
+	    	
+	    }
+		List<Aviao> avioes = control.getLista();
+		
+		tblAviao.getItems().clear();
 	    
 	    for (Aviao aviao: avioes) {
 	    	tblAviao.getItems().add(aviao);
 	    }
 	    
-	    //Listener
+	}
+	
+	private void adicionarListener() {
+		//Listener
 	    tblAviao.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	txtId.setText(String.valueOf(newSelection.getId()));
 	    	txtCodigo.setText(newSelection.getCodigo());
@@ -216,11 +214,27 @@ public class CrudAviao extends Application {
 	}
 	
 	private void realizarInsert(Aviao aviao) {
-		//puxar insert da controller
+		control.setAviao(aviao);
+		try {
+			control.adicionar();
+		} catch (AviaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		preencherTabela();
 	}
 	
 	private void realizarUpdate(Aviao aviao) {
-		//puxar update
+		control.setAviao(aviao);
+		try {
+			control.atualizar();
+		} catch (AviaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		preencherTabela();
 	}
 
 	private void realizarDelete(Long aviaoId) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
+import Control.BilheteControl;
 import Entity.Bilhete;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -48,12 +49,15 @@ public class CrudBilhete extends Application{
 		
 	private Scene scene;
 	
+	private BilheteControl control;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Bilhetes");
 		
 		iniciarAtributos();
 		preencherTabela();
+		adicionarListener();
 		definirLayout();
 		
 		stage.setResizable(false);
@@ -177,37 +181,22 @@ public class CrudBilhete extends Application{
 	}
 	
 	private void preencherTabela() {
-	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
+		try {
+	    	control.pesquisarTodos();
+	    } catch (Exception ex) {
+	    	
+	    }
+	    List<Bilhete> bilhetes = control.getLista();	//já puxar os valores do getAll aqui
 
-	    //valores de teste -- começo
-	    Bilhete teste1 = new Bilhete();
-	    Bilhete teste2 = new Bilhete();
-	    
-	    teste1.setId(1);
-	    teste1.setNumero(1);
-	    teste1.setAssento("1");
-	    teste1.setPesoBagagem(10.0);
-	    teste1.setChegada(LocalDate.now());
-	    teste1.setPartida(LocalDate.now());
-	    teste1.setCodigoAeroporto("gru");
-	    
-	    teste2.setId(2);
-	    teste2.setNumero(2);
-	    teste2.setAssento("2");
-	    teste2.setPesoBagagem(8.0);
-	    teste2.setChegada(LocalDate.now());
-	    teste2.setPartida(LocalDate.now());
-	    teste2.setCodigoAeroporto("mcz");
-	    
-	    bilhetes.add(teste1);
-	    bilhetes.add(teste2);
-	    //valores de teste -- fim
+	    tblBilhete.getItems().clear();
 	    
 	    for (Bilhete bilhete: bilhetes) {
 	    	tblBilhete.getItems().add(bilhete);
 	    }
-	    
-	    //Listener
+	}
+	
+	private void adicionarListener() {
+		//Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	txtId.setText(String.valueOf(newSelection.getId()));
 	    	txtNumero.setText(String.valueOf(newSelection.getNumero()));
@@ -273,11 +262,25 @@ public class CrudBilhete extends Application{
 	}
 	
 	private void realizarInsert(Bilhete bilhete) {
-		//puxar insert da controller
+		control.setBilhete(bilhete);
+		try {
+			control.adicionar();
+		} catch(Exception ex) {
+			
+		}
+		
+		preencherTabela();
 	}
 	
 	private void realizarUpdate(Bilhete bilhete) {
-		//puxar update
+		control.setBilhete(bilhete);
+		try {
+			control.atualizar();
+		} catch(Exception ex) {
+			
+		}
+		
+		preencherTabela();
 	}
 
 	private void realizarDelete(Long bilheteId) {
