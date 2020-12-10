@@ -7,6 +7,7 @@ import Boundary.Mensagem;
 import Control.BilheteControl;
 import Entity.Bilhete;
 import Exception.AviaoException;
+import Exception.BilheteException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -157,7 +158,7 @@ public class CheckIn extends Application {
 		control.setBilhete(bilhete);
 		try {
 			control.atualizar();
-		} catch (AviaoException e) {
+		} catch (BilheteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
