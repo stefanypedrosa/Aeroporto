@@ -5,7 +5,6 @@ import java.util.List;
 
 import Boundary.Mensagem;
 import Entity.Bilhete;
-import Entity.SituacaoBilhete;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -118,12 +117,12 @@ public class CheckIn extends Application {
 	    teste1.setId(1);
 	    teste1.setNumero(1);
 	    teste1.setAssento("1");
-	    teste1.setSituacaoBilhete(SituacaoBilhete.RESERVADO);
+	    teste1.setSituacaoBilhete("RESERVADO");
 	    
 	    teste2.setId(2);
 	    teste2.setNumero(2);
 	    teste2.setAssento("2");
-	    teste2.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
+	    teste2.setSituacaoBilhete("DISPONIVEL");
 	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);

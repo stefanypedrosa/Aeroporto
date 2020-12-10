@@ -42,7 +42,7 @@ CREATE TABLE bilhete (
   numero int DEFAULT 0,
   assento varchar(100) DEFAULT NULL,
   pesoBagagem double DEFAULT NULL,
-  situacao int DEFAULT 1,
+  situacaoBilhete varchar(15) DEFAULT "DISPONIVEL",
   partida date,
   chegada date,
   codigoAeroporto varchar(3) DEFAULT NULL,

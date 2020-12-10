@@ -8,7 +8,7 @@ public class Bilhete {
 	private int numero;
 	private String assento;
 	private double pesoBagagem;
-	private SituacaoBilhete situacaoBilhete;
+	private String situacaoBilhete;
 	private LocalDate partida;
 	private LocalDate chegada;
 	private String codigoAeroporto;
@@ -39,10 +39,16 @@ public class Bilhete {
 	public void setPesoBagagem(double pesoBagagem) {
 		this.pesoBagagem = pesoBagagem;
 	}
-	public SituacaoBilhete getSituacaoBilhete() {
+	public String getSituacaoBilhete() {
+		if(situacaoBilhete == null || situacaoBilhete == "") {
+			situacaoBilhete = "DISPONIVEL";
+		}
 		return situacaoBilhete;
 	}
-	public void setSituacaoBilhete(SituacaoBilhete situacaoBilhete) {
+	public void setSituacaoBilhete(String situacaoBilhete) {
+		if(situacaoBilhete == null || situacaoBilhete == "") {
+			situacaoBilhete = "DISPONIVEL";
+		}
 		this.situacaoBilhete = situacaoBilhete;
 	}
 	public LocalDate getPartida() {
