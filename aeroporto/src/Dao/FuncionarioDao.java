@@ -2,10 +2,10 @@ package Dao;
 
 import java.util.List;
 
-import Entity.Passageiro;
-import Exception.PassageiroException;
+import Entity.Funcionario;
+import Exception.FuncionarioException;
 
 public interface FuncionarioDao {
-	void adicionar(Passageiro p) throws PassageiroException;
-	List<Passageiro> pesquisarPorNome(String nome) throws PassageiroException;
+	void adicionar(Funcionario p) throws FuncionarioException;
+	List<Funcionario> pesquisarPorNome(String nome) throws FuncionarioException;
 }
