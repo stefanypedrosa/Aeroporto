@@ -105,6 +105,7 @@ public class AdquirirBilhete extends Application {
 	    //valores de teste -- começo
 	    Bilhete teste1 = new Bilhete();
 	    Bilhete teste2 = new Bilhete();
+	    Bilhete teste3 = new Bilhete();
 	    
 	    teste1.setId(1);
 	    teste1.setNumero(1);
@@ -116,12 +117,19 @@ public class AdquirirBilhete extends Application {
 	    teste2.setAssento("2");
 	    teste2.setSituacaoBilhete("VENDIDO");
 	    
+	    teste3.setId(3);
+	    teste3.setNumero(3);
+	    teste3.setAssento("A2");
+	    teste3.setSituacaoBilhete("RESERVADO");
+	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);
+	    bilhetes.add(teste3);
 	    //valores de teste -- fim
 	    
 	    for (Bilhete bilhete: bilhetes) {
-	    	tblBilhete.getItems().add(bilhete);
+	    	if(bilhete.getSituacaoBilhete().equals("DISPONIVEL") || bilhete.getSituacaoBilhete().equals("RESERVADO"))
+	    		tblBilhete.getItems().add(bilhete);
 	    }
 	    
 	    //Listener

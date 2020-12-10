@@ -140,7 +140,8 @@ public class CheckIn extends Application {
 	    //valores de teste -- fim
 	    
 	    for (Bilhete bilhete: bilhetes) {
-	    	tblBilhete.getItems().add(bilhete);
+	    	if(bilhete.getSituacaoBilhete().equals("COMPRADO"))
+	    		tblBilhete.getItems().add(bilhete);
 	    }
 	    
 	    //Listener
