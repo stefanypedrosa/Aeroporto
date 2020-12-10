@@ -28,11 +28,13 @@ public class CrudHorario extends Application{
 	private TableColumn<Horario, String> tcCodigo;
 	private TableColumn<Horario, String> tcChegada;
 	private TableColumn<Horario, String> tcPartida;
+	private TableColumn<Horario, String> tcCodigoAeroporto;
 	
 	private TextField txtId;
 	private TextField txtCodigo;
 	private DatePicker dtpChegada;
 	private DatePicker dtpPartida;
+	private TextField txtCodigoAeroporto;
 	
 	private Button btnAdicionar;
 	private Button btnAtualizar;
@@ -68,10 +70,14 @@ public class CrudHorario extends Application{
 	    tcPartida = new TableColumn<>("Partida");
 	    tcPartida.setCellValueFactory(new PropertyValueFactory<>("partida"));
 	    
+	    tcCodigoAeroporto = new TableColumn<>("Codigo Aeroporto");
+	    tcCodigoAeroporto.setCellValueFactory(new PropertyValueFactory<>("codigoAeroporto"));
+	    
 	    txtId = new TextField();
 	    txtCodigo = new TextField();
 	    dtpChegada = new DatePicker();
 	    dtpPartida = new DatePicker();
+	    txtCodigoAeroporto = new TextField();
 	    btnAdicionar = new Button("Adicionar");
 	    btnAtualizar = new Button("Atualizar");
 	    btnRemover = new Button("Remover");
@@ -83,11 +89,13 @@ public class CrudHorario extends Application{
 	    tcCodigo.prefWidthProperty().bind(tblHorario.widthProperty().divide(4));
 	    tcChegada.prefWidthProperty().bind(tblHorario.widthProperty().divide(4));
 	    tcPartida.prefWidthProperty().bind(tblHorario.widthProperty().divide(4));
+	    tcCodigoAeroporto.prefWidthProperty().bind(tblHorario.widthProperty().divide(4));
 
 	    tblHorario.getColumns().add(tcId);
 	    tblHorario.getColumns().add(tcCodigo);
 	    tblHorario.getColumns().add(tcChegada);
 	    tblHorario.getColumns().add(tcPartida);
+	    tblHorario.getColumns().add(tcCodigoAeroporto);
 	    
         btnAdicionar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -149,11 +157,13 @@ public class CrudHorario extends Application{
 	    teste1.setCodigo("teste1");
 	    teste1.setChegada(LocalDate.now());
 	    teste1.setPartida(LocalDate.now());
+	    teste1.setCodigoAeroporto("gru");
 	    
 	    teste2.setId(2);
 	    teste2.setCodigo("teste2");
 	    teste2.setChegada(LocalDate.now());
 	    teste2.setPartida(LocalDate.now());
+	    teste2.setCodigoAeroporto("mcz");
 	    
 	    horarios.add(teste1);
 	    horarios.add(teste2);
@@ -169,6 +179,7 @@ public class CrudHorario extends Application{
 	    	txtCodigo.setText(newSelection.getCodigo());
 	    	dtpChegada.setValue(newSelection.getChegada());
 	    	dtpPartida.setValue(newSelection.getPartida());
+	    	txtCodigoAeroporto.setText(String.valueOf(newSelection.getCodigoAeroporto()));
 	    });
 	}
 	
@@ -189,6 +200,7 @@ public class CrudHorario extends Application{
 	    grid.add(txtCodigo, 2, 2);
 	    grid.add(dtpChegada, 3, 2);
 	    grid.add(dtpPartida, 4, 2);
+	    grid.add(txtCodigoAeroporto, 5, 2);
 	    grid.add(btnAdicionar, 1, 3);
 	    grid.add(btnAtualizar, 2, 3, 2, 1);
 	    grid.add(btnRemover, 4, 3);
@@ -202,7 +214,7 @@ public class CrudHorario extends Application{
 		retornoHorario.setCodigo(txtCodigo.getText());
 		retornoHorario.setChegada(dtpChegada.getValue());
 		retornoHorario.setPartida(dtpPartida.getValue());
-		
+		retornoHorario.setCodigoAeroporto(txtCodigoAeroporto.getText());
 		return retornoHorario;
 	}
 	

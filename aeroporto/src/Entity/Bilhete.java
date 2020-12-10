@@ -5,6 +5,7 @@ public class Bilhete {
 	private long id;
 	private int numero;
 	private String assento;
+	private double pesoBagagem;
 	private SituacaoBilhete situacaoBilhete;
 	private Horario horario;
 	private Passageiro passageiro;
@@ -27,6 +28,12 @@ public class Bilhete {
 	}
 	public void setAssento(String assento) {
 		this.assento = assento;
+	}
+	public double getPesoBagagem() {
+		return pesoBagagem;
+	}
+	public void setPesoBagagem(double pesoBagagem) {
+		this.pesoBagagem = pesoBagagem;
 	}
 	public SituacaoBilhete getSituacaoBilhete() {
 		return situacaoBilhete;
@@ -60,7 +67,7 @@ public class Bilhete {
 		
 	}
 	
-	void checkIn(Bagagem bagagem) {
+	void checkIn() {
 		
 	}
 	

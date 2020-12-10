@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
-import Entity.Bagagem;
 import Entity.Bilhete;
 import Entity.SituacaoBilhete;
 import javafx.application.Application;
@@ -89,11 +88,8 @@ public class CheckIn extends Application {
                 //ir para tela de signUp
             	if (selectedBilhete != null) {
             		if (!txtId.getText().equals("") && !txtPeso.getText().equals("")) {
-    	            	Bagagem bagagem = new Bagagem();
     	            	try {
-    	            		bagagem.setId(Integer.parseInt(txtId.getText()));
-    	            		bagagem.setPeso(Double.parseDouble(txtPeso.getText()));
-    	            		realizarCheckIn(bagagem);
+    	            		realizarCheckIn();
     					} catch (Exception e) {
     						// TODO Auto-generated catch block
     						e.printStackTrace();
@@ -161,7 +157,7 @@ public class CheckIn extends Application {
 	    scene = new Scene(grid, 320, 480);
 	}
 	
-	private void realizarCheckIn(Bagagem bagagem) {
+	private void realizarCheckIn() {
 		//colocar aqui lógica do checkIn
 	}
 

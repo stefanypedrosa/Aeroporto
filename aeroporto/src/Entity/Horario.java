@@ -8,8 +8,7 @@ public class Horario {
 	private String codigo;
 	private LocalDate partida;
 	private LocalDate chegada;
-	private Aeroporto aeroporto;
-	private Aviao aviao;
+	private String codigoAeroporto;
 	
 	public long getId() {
 		return id;
@@ -35,11 +34,11 @@ public class Horario {
 	public void setChegada(LocalDate chegada) {
 		this.chegada = chegada;
 	}
-	public Aeroporto getAeroporto() {
-		return aeroporto;
+	public String getCodigoAeroporto() {
+		return codigoAeroporto;
 	}
-	public void setAeroporto(Aeroporto aeroporto) {
-		this.aeroporto = aeroporto;
+	public void setCodigoAeroporto(String codigoAeroporto) {
+		this.codigoAeroporto = codigoAeroporto;
 	}
 	
 	

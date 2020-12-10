@@ -5,7 +5,7 @@ public class Aviao {
 	private long id;
 	private String codigo;
 	private int vagas;
-	private CiaAerea ciaAerea;
+	private String ciaAerea;
 	
 	
 	public long getId() {
@@ -26,10 +26,10 @@ public class Aviao {
 	public void setVagas(int vagas) {
 		this.vagas = vagas;
 	}
-	public CiaAerea getCiaAerea() {
+	public String getCiaAerea() {
 		return ciaAerea;
 	}
-	public void setCiaAerea(CiaAerea ciaAerea) {
+	public void setCiaAerea(String ciaAerea) {
 		this.ciaAerea = ciaAerea;
 	}
 	
