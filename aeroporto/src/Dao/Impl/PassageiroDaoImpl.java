@@ -76,7 +76,6 @@ public class PassageiroDaoImpl implements PassageiroDao{
 			String sql = "SELECT * FROM Passageiro WHERE nome like ?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, "%" + nome + "%");
-			System.out.println(nome);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) { 
 				Passageiro p = new Passageiro();
@@ -126,7 +125,20 @@ public class PassageiroDaoImpl implements PassageiroDao{
 		return lista;
 	}
 	
-	
+	@Override
+	public void remover(long id) throws PassageiroException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "DELETE FROM Passageiro WHERE id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, id);
+			st.executeQuery();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PassageiroException(e);
+		}
+	}
 	
 
 }

@@ -10,4 +10,5 @@ public interface PassageiroDao {
 	List<Passageiro> pesquisarPorNome(String nome) throws PassageiroException;
 	List<Passageiro> pesquisarTodos() throws PassageiroException;
 	void atualizar(Passageiro p) throws PassageiroException;
+	void remover(long id) throws PassageiroException;
 }

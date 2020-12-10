@@ -79,6 +79,10 @@ public class PassageiroControl {
 		this.lista.addAll(Passageiros);
 	}
 	
+	public void remover() throws PassageiroException {
+		PassageiroDAO.remover(getIdProperty().get());
+	}
+	
 	public LongProperty getIdProperty() {
 		return idProperty;
 	}

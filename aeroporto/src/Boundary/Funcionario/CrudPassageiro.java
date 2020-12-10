@@ -33,7 +33,6 @@ public class CrudPassageiro extends Application {
 	private TableColumn<Passageiro, String> tcNumeroCartao;
 	private TableColumn<Passageiro, String> tcTelefone;
 	private TableColumn<Passageiro, String> tcDataNascimento;
-//	private TableColumn<Passageiro, String> tcEndereco;
 	private TableColumn<Passageiro, String> tcSenha;
 	
 	private TextField txtId;
@@ -44,7 +43,6 @@ public class CrudPassageiro extends Application {
 	private TextField txtNumeroCartao;
 	private TextField txtTelefone;
 	private DatePicker dtpDataNascimento;
-//	private TextField txtEndereco;
 	private TextField txtSenha;
 	
 	private Button btnAdicionar;
@@ -290,7 +288,16 @@ public class CrudPassageiro extends Application {
 	}
 
 	private void realizarDelete(Long passageiroId) {
-		//puxar delete
+		Passageiro p = new Passageiro();
+		p.setId(passageiroId);
+		control.setPassageiro(p);
+		try {
+			control.remover();
+		} catch(Exception ex) {
+			
+		}
+		
+		preencherTabela();
 	}
 	
 }
