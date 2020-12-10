@@ -1,5 +1,6 @@
 package Boundary.Funcionario;
 
+import Boundary.Entrada;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,6 +25,7 @@ public class MenuFuncionario extends Application {
         Button btnAviao = new Button("Cadastrar Aviões");
         Button btnFuncionario = new Button("Cadastrar Funcionários");
         Button btnBilhete = new Button("Cadastrar Bilhete");
+        Button btnVoltar = new Button("Voltar");
         
         titulo.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         
@@ -93,6 +95,22 @@ public class MenuFuncionario extends Application {
             }
         });
         
+        btnVoltar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //voltar para entrada
+            	Entrada entrada = new Entrada();
+            	try {
+            		Stage newStage = new Stage();
+					entrada.start(newStage);
+					stage.hide();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+        
         GridPane grid = new GridPane();
 //        grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -103,8 +121,10 @@ public class MenuFuncionario extends Application {
         grid.add(btnAviao, 2, 2);
         grid.add(btnFuncionario, 1, 3);
         grid.add(btnBilhete, 2, 3);
+        grid.add(btnVoltar, 1, 4, 2, 1);
         
         GridPane.setHalignment(titulo, HPos.CENTER);
+        GridPane.setHalignment(btnVoltar, HPos.CENTER);
 		
 		stage.setResizable(false);
 		stage.setScene(new Scene(grid, 280, 150));
