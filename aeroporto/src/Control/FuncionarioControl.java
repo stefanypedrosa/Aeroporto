@@ -63,6 +63,10 @@ private ObservableList<Funcionario> lista = FXCollections.observableArrayList();
 		FuncionarioDAO.adicionar(getFuncionario());
 	}
 	
+	public void atualizar() throws FuncionarioException { 
+		FuncionarioDAO.atualizar(getFuncionario());
+	}
+	
 	public void pesquisarPorNome() throws FuncionarioException {
 		List<Funcionario> Funcionarios = FuncionarioDAO.pesquisarPorNome(this.getNomeProperty().get());
 		this.lista.clear();
