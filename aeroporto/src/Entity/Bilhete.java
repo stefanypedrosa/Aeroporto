@@ -1,5 +1,7 @@
 package Entity;
 
+import java.time.LocalDate;
+
 public class Bilhete {
 
 	private long id;
@@ -7,7 +9,9 @@ public class Bilhete {
 	private String assento;
 	private double pesoBagagem;
 	private SituacaoBilhete situacaoBilhete;
-	private Horario horario;
+	private LocalDate partida;
+	private LocalDate chegada;
+	private String codigoAeroporto;
 	private Passageiro passageiro;
 	
 	
@@ -41,11 +45,23 @@ public class Bilhete {
 	public void setSituacaoBilhete(SituacaoBilhete situacaoBilhete) {
 		this.situacaoBilhete = situacaoBilhete;
 	}
-	public Horario getHorario() {
-		return horario;
+	public LocalDate getPartida() {
+		return partida;
 	}
-	public void setHorario(Horario horario) {
-		this.horario = horario;
+	public void setPartida(LocalDate partida) {
+		this.partida = partida;
+	}
+	public LocalDate getChegada() {
+		return chegada;
+	}
+	public void setChegada(LocalDate chegada) {
+		this.chegada = chegada;
+	}
+	public String getCodigoAeroporto() {
+		return codigoAeroporto;
+	}
+	public void setCodigoAeroporto(String codigoAeroporto) {
+		this.codigoAeroporto = codigoAeroporto;
 	}
 	public Passageiro getPassageiro() {
 		return passageiro;

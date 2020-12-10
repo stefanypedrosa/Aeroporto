@@ -23,7 +23,6 @@ public class MenuFuncionario extends Application {
 		Button btnPassageiro = new Button("Cadastrar Passageiros");
         Button btnAviao = new Button("Cadastrar Aviões");
         Button btnFuncionario = new Button("Cadastrar Funcionários");
-        Button btnHorario = new Button("Cadastrar Horários");
         Button btnBilhete = new Button("Cadastrar Bilhete");
         
         titulo.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -31,7 +30,6 @@ public class MenuFuncionario extends Application {
         btnPassageiro.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnAviao.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnFuncionario.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        btnHorario.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnBilhete.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         
         btnPassageiro.setOnAction(new EventHandler<ActionEvent>() {
@@ -79,20 +77,6 @@ public class MenuFuncionario extends Application {
             }
         });
         
-        btnHorario.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //ir para crud de horario
-            	CrudHorario crudHorario = new CrudHorario();
-            	try {
-            		Stage newStage = new Stage();
-					crudHorario.start(newStage);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        });
         
         btnBilhete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -118,8 +102,7 @@ public class MenuFuncionario extends Application {
         grid.add(btnPassageiro, 1, 2);
         grid.add(btnAviao, 2, 2);
         grid.add(btnFuncionario, 1, 3);
-        grid.add(btnHorario, 2, 3);
-        grid.add(btnBilhete, 1, 4, 2, 1);
+        grid.add(btnBilhete, 2, 3);
         
         GridPane.setHalignment(titulo, HPos.CENTER);
 		
