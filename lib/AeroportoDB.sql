@@ -37,20 +37,14 @@ CREATE TABLE aviao (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE horario (
-  id int NOT NULL AUTO_INCREMENT,
-  codigo varchar(100) DEFAULT NULL,
-  partida date,
-  chegada date,
-  codigoAeroporto varchar(3) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE bilhete (
   id int NOT NULL AUTO_INCREMENT,
   numero int DEFAULT 0,
   assento varchar(100) DEFAULT NULL,
   pesoBagagem double DEFAULT NULL,
   situacao int DEFAULT 1,
+  partida date,
+  chegada date,
+  codigoAeroporto varchar(3) DEFAULT NULL,
   PRIMARY KEY (id)
 );
