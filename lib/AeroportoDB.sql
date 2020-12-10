@@ -32,7 +32,8 @@ CREATE TABLE funcionario (
 CREATE TABLE aviao (
   id int NOT NULL AUTO_INCREMENT,
   codigo varchar(100) DEFAULT NULL,
-  vagas int DEFAULT 0,
+  vagas int DEFAULT 50,
+  ciaAerea varchar(15) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
@@ -41,6 +42,7 @@ CREATE TABLE horario (
   codigo varchar(100) DEFAULT NULL,
   partida date,
   chegada date,
+  codigoAeroporto varchar(3) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
@@ -48,6 +50,7 @@ CREATE TABLE bilhete (
   id int NOT NULL AUTO_INCREMENT,
   numero int DEFAULT 0,
   assento varchar(100) DEFAULT NULL,
-  situacao int DEFAULT 0,
+  pesoBagagem double DEFAULT NULL,
+  situacao int DEFAULT 1,
   PRIMARY KEY (id)
 );
