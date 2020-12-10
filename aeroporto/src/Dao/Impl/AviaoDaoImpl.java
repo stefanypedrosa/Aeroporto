@@ -82,13 +82,13 @@ public class AviaoDaoImpl implements AviaoDao{
 	}
 
 	@Override
-	public List<Aviao> pesquisarPorNome(String nome) throws AviaoException {
+	public List<Aviao> pesquisarPorCodigo(String codigo) throws AviaoException {
 		List<Aviao> lista = new ArrayList<>();
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "SELECT * FROM Aviao WHERE nome like ?";
+			String sql = "SELECT * FROM Aviao WHERE codigo like ?";
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, "%" + nome + "%");
+			st.setString(1, "%" + codigo + "%");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) { 
 				Aviao a = new Aviao();
@@ -104,6 +104,31 @@ public class AviaoDaoImpl implements AviaoDao{
 		}
 		return lista;
 	}
+	
+	
+	@Override
+	public List<Aviao> pesquisarTodos() throws AviaoException {
+		List<Aviao> lista = new ArrayList<>();
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "SELECT * FROM Aviao";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) { 
+				Aviao a = new Aviao();
+				a.setId(rs.getLong("id"));
+				a.setCodigo(rs.getString("codigo"));
+				a.setVagas(rs.getInt("vagas"));
+				a.setCiaAerea(rs.getString("ciaAerea"));
+				lista.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AviaoException(e);
+		}
+		return lista;
+	}
+	
 	
 	@Override
 	public void remover(long id) throws AviaoException {

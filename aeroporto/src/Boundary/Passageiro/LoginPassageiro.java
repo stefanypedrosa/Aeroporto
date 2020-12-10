@@ -1,7 +1,11 @@
 package Boundary.Passageiro;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Boundary.Entrada;
 import Boundary.Mensagem;
+import Entity.Passageiro;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -119,8 +123,12 @@ public class LoginPassageiro extends Application {
 	}
 	
 	private boolean login(String username, String password) {
-		//adicionar aqui lógica do login
-		return true;
+		List<Passageiro> passageiros = new ArrayList<Passageiro>();
+		for (Passageiro passageiro: passageiros) {
+    		if(passageiro.getUsuario().equals(username) && passageiro.getSenha().equals(password))
+    			return true;
+		}
+    	return false;
 	}
 
 }

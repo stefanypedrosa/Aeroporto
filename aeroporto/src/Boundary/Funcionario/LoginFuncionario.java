@@ -1,7 +1,12 @@
 package Boundary.Funcionario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Boundary.Entrada;
 import Boundary.Mensagem;
+import Entity.Bilhete;
+import Entity.Funcionario;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,20 +47,20 @@ public class LoginFuncionario extends Application {
                 //ir para tela de funcionário
             	if (!txtLogin.getText().equals("") && !txtSenha.getText().equals("")) {
             		if (login(txtLogin.getText(), txtSenha.getText())) {
-    	            	MenuFuncionario menuFuncionario = new MenuFuncionario();
-    	            	try {
-    	            		Stage newStage = new Stage();
-    						menuFuncionario.start(newStage);
-    						stage.hide();
-    					} catch (Exception e) {
-    						// TODO Auto-generated catch block
-    						e.printStackTrace();
-    					}
-                	} else {
-                		Stage newStage = new Stage();
-                		Mensagem mensagem = new Mensagem("Login incorreto");
-                		mensagem.start(newStage);
-                	}
+	    	            	MenuFuncionario menuFuncionario = new MenuFuncionario();
+	    	            	try {
+	    	            		Stage newStage = new Stage();
+	    						menuFuncionario.start(newStage);
+	    						stage.hide();
+	    					} catch (Exception e) {
+	    						// TODO Auto-generated catch block
+	    						e.printStackTrace();
+	    					}
+	                	} else {
+	                		Stage newStage = new Stage();
+	                		Mensagem mensagem = new Mensagem("Login incorreto");
+	                		mensagem.start(newStage);
+	                	}
             	} else {
             		Stage newStage = new Stage();
             		Mensagem mensagem = new Mensagem("Preencha todos os campos");
@@ -101,8 +106,12 @@ public class LoginFuncionario extends Application {
 	}
 	
 	private boolean login(String username, String password) {
-		//adicionar aqui lógica do login
-		return true;
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		for (Funcionario funcionario: funcionarios) {
+    		if(funcionario.getUsuario().equals(username) && funcionario.getSenha().equals(password))
+    			return true;
+		}
+    	return false;
 	}
 
 }
