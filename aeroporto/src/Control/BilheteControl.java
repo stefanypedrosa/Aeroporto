@@ -66,8 +66,14 @@ private ObservableList<Bilhete> lista = FXCollections.observableArrayList();
 		BilheteDAO.adicionar(getBilhete());
 	}
 	
-	public void pesquisarPorNome() throws BilheteException {
+	public void pesquisarPorNumero() throws BilheteException {
 		List<Bilhete> Bilhetes = BilheteDAO.pesquisarPorNumero(this.getNumeroProperty().get());
+		this.lista.clear();
+		this.lista.addAll(Bilhetes);
+	}
+	
+	public void pesquisarTodos() throws BilheteException {
+		List<Bilhete> Bilhetes = BilheteDAO.pesquisarTodos();
 		this.lista.clear();
 		this.lista.addAll(Bilhetes);
 	}

@@ -48,9 +48,8 @@ public class BilheteDaoImpl implements BilheteDao {
 		List<Bilhete> lista = new ArrayList<>();
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "SELECT * FROM Bilhete WHERE nome like ?";
+			String sql = "SELECT * FROM Bilhete WHERE numero like ?";
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, "%" + numero + "%");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) { 
 				Bilhete b = new Bilhete();
@@ -71,5 +70,32 @@ public class BilheteDaoImpl implements BilheteDao {
 		return lista;
 	}
 
+	
+	@Override
+	public List<Bilhete> pesquisarTodos() throws BilheteException {
+		List<Bilhete> lista = new ArrayList<>();
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "SELECT * FROM Bilhete";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) { 
+				Bilhete b = new Bilhete();
+				b.setId(rs.getLong("id"));
+				b.setNumero(rs.getInt("numero"));
+				b.setAssento(rs.getString("assento"));
+				b.setPesoBagagem(rs.getDouble("pesoBagagem"));
+				b.setSituacaoBilhete(rs.getString("situacaoBilhete"));
+				b.setPartida(rs.getDate("partida").toLocalDate());
+				b.setChegada(rs.getDate("chegada").toLocalDate());
+				b.setCodigoAeroporto(rs.getString("codigoAeroporto"));
+				lista.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BilheteException(e);
+		}
+		return lista;
+	}
 
 }

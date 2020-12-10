@@ -49,8 +49,14 @@ private ObservableList<Aviao> lista = FXCollections.observableArrayList();
 		AviaoDAO.adicionar(getAviao());
 	}
 	
-	public void pesquisarPorNome() throws AviaoException {
-		List<Aviao> Aviaos = AviaoDAO.pesquisarPorNome(this.getCodigoProperty().get());
+	public void pesquisarPorCodigo() throws AviaoException {
+		List<Aviao> Aviaos = AviaoDAO.pesquisarPorCodigo(this.getCodigoProperty().get());
+		this.lista.clear();
+		this.lista.addAll(Aviaos);
+	}
+	
+	public void pesquisarTodos() throws AviaoException {
+		List<Aviao> Aviaos = AviaoDAO.pesquisarTodos();
 		this.lista.clear();
 		this.lista.addAll(Aviaos);
 	}

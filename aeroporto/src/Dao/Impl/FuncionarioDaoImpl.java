@@ -48,7 +48,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 	public void atualizar(Funcionario f) throws FuncionarioException {
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "UPDATE Passageiro SET id = ?, nome = ?, email = ?, telefone = ?, usuario = ?, senha = ?, dataNascimento = ?, documento = ?, numeroCartao = ?; "; 
+			String sql = "UPDATE Passageiro SET id = ?, nome = ?, email = ?, telefone = ?, usuario = ?, senha = ?, dataNascimento = ?, codigo = ?, contaCorrente = ?; "; 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setLong(1, f.getId());
 			st.setString(2, f.getNome());
