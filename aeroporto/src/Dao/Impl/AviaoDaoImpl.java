@@ -11,6 +11,7 @@ import Connection.ConnectionSingleton;
 import Dao.AviaoDao;
 import Entity.Aviao;
 import Exception.AviaoException;
+import Exception.PassageiroException;
 
 public class AviaoDaoImpl implements AviaoDao{
 
@@ -60,6 +61,21 @@ public class AviaoDaoImpl implements AviaoDao{
 			throw new AviaoException(e);
 		}
 		return lista;
+	}
+	
+	@Override
+	public void remover(long id) throws AviaoException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "DELETE FROM Aviao WHERE id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, id);
+			st.executeQuery();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AviaoException(e);
+		}
 	}
 
 }

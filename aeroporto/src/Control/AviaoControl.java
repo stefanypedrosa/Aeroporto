@@ -55,6 +55,9 @@ private ObservableList<Aviao> lista = FXCollections.observableArrayList();
 		this.lista.addAll(Aviaos);
 	}
 	
+	public void remover() throws AviaoException {
+		AviaoDAO.remover(getIdProperty().get());
+	}
 	
 	public LongProperty getIdProperty() {
 		return idProperty;

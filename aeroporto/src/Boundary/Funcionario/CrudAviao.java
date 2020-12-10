@@ -47,6 +47,8 @@ public class CrudAviao extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Aviões");
 		
+		control = new AviaoControl();
+		
 		iniciarAtributos();
 		preencherTabela();
 		adicionarListener();
@@ -238,7 +240,16 @@ public class CrudAviao extends Application {
 	}
 
 	private void realizarDelete(Long aviaoId) {
-		//puxar delete
+		Aviao a = new Aviao();
+		a.setId(aviaoId);
+		control.setAviao(a);
+		try {
+			control.remover();
+		} catch(Exception ex) {
+			
+		}
+		
+		preencherTabela();
 	}
 	
 }
