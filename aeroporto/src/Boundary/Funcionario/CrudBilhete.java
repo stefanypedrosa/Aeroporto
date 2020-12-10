@@ -6,6 +6,7 @@ import java.util.List;
 
 import Boundary.Mensagem;
 import Control.BilheteControl;
+import Entity.Aviao;
 import Entity.Bilhete;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -284,7 +285,15 @@ public class CrudBilhete extends Application{
 	}
 
 	private void realizarDelete(Long bilheteId) {
-		//puxar delete
+		Bilhete b = new Bilhete();
+		b.setId(bilheteId);
+		control.setBilhete(b);
+		try {
+			control.remover();
+		} catch(Exception ex) {
+			
+		}
+		preencherTabela();
 	}
 	
 }
