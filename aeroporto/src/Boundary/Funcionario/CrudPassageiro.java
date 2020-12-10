@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
+import Control.PassageiroControl;
 import Entity.Passageiro;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,10 +52,13 @@ public class CrudPassageiro extends Application {
 	private Button btnRemover;
 	
 	private Scene scene;
+	
+	private PassageiroControl control;
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Passageiros");
+		control = new PassageiroControl();
 		
 		iniciarAtributos();
 		preencherTabela();
@@ -180,37 +185,14 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void preencherTabela() {
-		//ADICIONAR ENDEREÇO DEPOIS
-	    
-	    List<Passageiro> passageiros = new ArrayList<Passageiro>();	//já puxar os valores do getAll aqui
-
-	    //valores de teste -- começo
-	    Passageiro teste1 = new Passageiro();
-	    Passageiro teste2 = new Passageiro();
-	    
-	    teste1.setId(1);
-	    teste1.setUsuario("teste1");
-	    teste1.setEmail("teste1@gmail.com");
-	    teste1.setNome("Teste 1");
-	    teste1.setDocumento("11122233344");
-	    teste1.setNumeroCartao("121221121");
-	    teste1.setTelefone("9");
-	    teste1.setDataNascimento(LocalDate.now());
-	    teste1.setSenha("aaaaaaa");
-	    
-	    teste2.setId(2);
-	    teste2.setUsuario("teste2");
-	    teste2.setEmail("teste2@gmail.com");
-	    teste2.setNome("Teste 2");
-	    teste2.setDocumento("22222233344");
-	    teste2.setNumeroCartao("222222222");
-	    teste2.setTelefone("99");
-	    teste2.setDataNascimento(LocalDate.now());
-	    teste2.setSenha("bbbbbbbb");
-	    
-	    passageiros.add(teste1);
-	    passageiros.add(teste2);
-	    //valores de teste -- fim
+		control.setPassageiro(new Passageiro());
+		try {
+			control.pesquisarPorNome();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    List<Passageiro> passageiros = control.getLista();
 	    
 	    for (Passageiro passageiro: passageiros) {
 	    	tblPassageiro.getItems().add(passageiro);
