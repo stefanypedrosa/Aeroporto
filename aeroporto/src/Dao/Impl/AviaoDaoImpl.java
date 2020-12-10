@@ -57,29 +57,6 @@ public class AviaoDaoImpl implements AviaoDao{
 		}
 
 	}
-	
-	@Override
-	public List<Aviao> pesquisarTodos() throws AviaoException {
-		List<Aviao> lista = new ArrayList<>();
-		try {
-			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "SELECT * FROM Aviao";
-			PreparedStatement st = con.prepareStatement(sql);
-			ResultSet rs = st.executeQuery();
-			while (rs.next()) { 
-				Aviao a = new Aviao();
-				a.setId(rs.getLong("id"));
-				a.setCodigo(rs.getString("codigo"));
-				a.setVagas(rs.getInt("vagas"));
-				a.setCiaAerea(rs.getString("ciaAerea"));
-				lista.add(a);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new AviaoException(e);
-		}
-		return lista;
-	}
 
 	@Override
 	public List<Aviao> pesquisarPorCodigo(String codigo) throws AviaoException {

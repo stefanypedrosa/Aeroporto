@@ -5,7 +5,9 @@ import java.util.List;
 
 import Boundary.Entrada;
 import Boundary.Mensagem;
+import Control.PassageiroControl;
 import Entity.Passageiro;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -123,7 +125,14 @@ public class LoginPassageiro extends Application {
 	}
 	
 	private boolean login(String username, String password) {
-		List<Passageiro> passageiros = new ArrayList<Passageiro>();
+		PassageiroControl control = new PassageiroControl();
+		try {
+			control.pesquisarTodos();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Passageiro> passageiros = control.getLista();
 		for (Passageiro passageiro: passageiros) {
     		if(passageiro.getUsuario().equals(username) && passageiro.getSenha().equals(password))
     			return true;

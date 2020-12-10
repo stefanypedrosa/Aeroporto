@@ -5,8 +5,11 @@ import java.util.List;
 
 import Boundary.Entrada;
 import Boundary.Mensagem;
+import Control.FuncionarioControl;
 import Entity.Bilhete;
 import Entity.Funcionario;
+import Exception.FuncionarioException;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -106,7 +109,14 @@ public class LoginFuncionario extends Application {
 	}
 	
 	private boolean login(String username, String password) {
-		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		FuncionarioControl control = new FuncionarioControl();
+		try {
+			control.pesquisarTodos();
+		} catch (FuncionarioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Funcionario> funcionarios = control.getLista();
 		for (Funcionario funcionario: funcionarios) {
     		if(funcionario.getUsuario().equals(username) && funcionario.getSenha().equals(password))
     			return true;
