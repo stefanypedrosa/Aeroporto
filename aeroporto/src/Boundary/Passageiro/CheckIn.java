@@ -25,10 +25,11 @@ public class CheckIn extends Application {
 	private TableColumn<Bilhete, String> tcId;
 	private TableColumn<Bilhete, String> tcNumero;
 	private TableColumn<Bilhete, String> tcAssento;
+	private TableColumn<Bilhete, String> tcPesoBagagem;
 	private TableColumn<Bilhete, String> tcSituacao;
-	
-	private TextField txtId;
-	private TextField txtPeso;
+	private TableColumn<Bilhete, String> tcChegada;
+	private TableColumn<Bilhete, String> tcPartida;
+	private TableColumn<Bilhete, String> tcCodigoAeroporto;
 	
 	private Button btnCheckIn;
 		
@@ -52,7 +53,7 @@ public class CheckIn extends Application {
 	private void iniciarAtributos() {
 		tblBilhete = new TableView<Bilhete>();
 
-	    tcId = new TableColumn<>("ID");
+		tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
 	    tcNumero = new TableColumn<>("Número");
@@ -61,43 +62,53 @@ public class CheckIn extends Application {
 	    tcAssento = new TableColumn<>("Assento");
 	    tcAssento.setCellValueFactory(new PropertyValueFactory<>("assento"));
 	    
-	    tcSituacao = new TableColumn<>("Situacao");
-	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("situacaoBilhete"));		//trocar para situacao depois
+	    tcPesoBagagem = new TableColumn<>("Peso Bagagem");
+	    tcPesoBagagem.setCellValueFactory(new PropertyValueFactory<>("pesoBagagem"));
 	    
-	    txtId = new TextField();
-	    txtPeso = new TextField();
+	    tcSituacao = new TableColumn<>("Situacao Bilhete");
+	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("situacaoBilhete"));		
+	    
+	    tcChegada = new TableColumn<>("Chegada");
+	    tcChegada.setCellValueFactory(new PropertyValueFactory<>("chegada"));
+	    
+	    tcPartida = new TableColumn<>("Partida");
+	    tcPartida.setCellValueFactory(new PropertyValueFactory<>("partida"));
+	    
+	    tcCodigoAeroporto = new TableColumn<>("Codigo Aeroporto");
+	    tcCodigoAeroporto.setCellValueFactory(new PropertyValueFactory<>("codigoAeroporto"));
+	    
 	    btnCheckIn = new Button("Check In");
-	    
-	    txtId.setPromptText("ID");
-	    txtPeso.setPromptText("Peso");
 	    
 	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.maxWidthProperty().divide(4));
 	    tcSituacao.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 
 	    tblBilhete.getColumns().add(tcId);
 	    tblBilhete.getColumns().add(tcNumero);
 	    tblBilhete.getColumns().add(tcAssento);
+	    tblBilhete.getColumns().add(tcPesoBagagem);
 	    tblBilhete.getColumns().add(tcSituacao);
+	    tblBilhete.getColumns().add(tcChegada);
+	    tblBilhete.getColumns().add(tcPartida);
+	    tblBilhete.getColumns().add(tcCodigoAeroporto);
+
 	    
 	    btnCheckIn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //ir para tela de signUp
-            	if (selectedBilhete != null) {
-            		if (!txtId.getText().equals("") && !txtPeso.getText().equals("")) {
+            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete().equals("COMPRADO")) {
     	            	try {
-    	            		realizarCheckIn();
+    	            		realizarCheckIn(selectedBilhete);
     					} catch (Exception e) {
     						// TODO Auto-generated catch block
     						e.printStackTrace();
     					}
-                	} else {
-                		Stage newStage = new Stage();
-                		Mensagem mensagem = new Mensagem("Preencha todos os campos");
-                		mensagem.start(newStage);
-                	}
             	} else {
             		Stage newStage = new Stage();
             		Mensagem mensagem = new Mensagem("Escolha um bilhete válido");
@@ -122,7 +133,7 @@ public class CheckIn extends Application {
 	    teste2.setId(2);
 	    teste2.setNumero(2);
 	    teste2.setAssento("2");
-	    teste2.setSituacaoBilhete("DISPONIVEL");
+	    teste2.setSituacaoBilhete("COMPRADO");
 	    
 	    bilhetes.add(teste1);
 	    bilhetes.add(teste2);
@@ -149,15 +160,14 @@ public class CheckIn extends Application {
 	    grid.setPadding(new Insets(0, 5, 0, 0));
 	    
 	    grid.add(tblBilhete, 1, 1, 2, 1);
-	    grid.add(txtId, 1, 2);
-	    grid.add(txtPeso, 2, 2);
 	    grid.add(btnCheckIn, 1, 3, 2, 1);
 
 	    scene = new Scene(grid, 320, 480);
 	}
 	
-	private void realizarCheckIn() {
-		//colocar aqui lógica do checkIn
+	private void realizarCheckIn(Bilhete bilhete) {
+		bilhete.setSituacaoBilhete("CONFIRMADO");
+		preencherTabela();
 	}
 
 }

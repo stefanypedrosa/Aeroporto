@@ -65,7 +65,7 @@ public class AdquirirBilhete extends Application {
 	    tcPesoBagagem = new TableColumn<>("Peso Bagagem");
 	    tcPesoBagagem.setCellValueFactory(new PropertyValueFactory<>("pesoBagagem"));
 	    
-	    tcSituacao = new TableColumn<>("Situacao");
+	    tcSituacao = new TableColumn<>("Situacao Bilhete");
 	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("situacaoBilhete"));		
 	    
 	    tcChegada = new TableColumn<>("Chegada");
