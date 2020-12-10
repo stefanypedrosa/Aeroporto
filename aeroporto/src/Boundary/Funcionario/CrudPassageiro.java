@@ -76,7 +76,7 @@ public class CrudPassageiro extends Application {
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-	    tcUsuario = new TableColumn<>("Usuário");
+	    tcUsuario = new TableColumn<>("Usuï¿½rio");
 	    tcUsuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 	    
 	    tcEmail = new TableColumn<>("Email");
@@ -88,7 +88,7 @@ public class CrudPassageiro extends Application {
 	    tcDocumento = new TableColumn<>("Documento");
 	    tcDocumento.setCellValueFactory(new PropertyValueFactory<>("documento"));
 	    
-	    tcNumeroCartao = new TableColumn<>("Número do cartão");
+	    tcNumeroCartao = new TableColumn<>("Nï¿½mero do cartï¿½o");
 	    tcNumeroCartao.setCellValueFactory(new PropertyValueFactory<>("numeroCartao"));
 	    
 	    tcTelefone = new TableColumn<>("Telefone");
@@ -97,7 +97,7 @@ public class CrudPassageiro extends Application {
 	    tcDataNascimento = new TableColumn<>("Data de nascimento");
 	    tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
 	    
-//	    tcEndereco = new TableColumn<>("Endereço");
+//	    tcEndereco = new TableColumn<>("Endereï¿½o");
 //	    tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 	    
 	    tcSenha = new TableColumn<>("Senha");
@@ -117,11 +117,11 @@ public class CrudPassageiro extends Application {
 	    btnRemover = new Button("Remover");
 	    
 	    txtId.setPromptText("ID");
-	    txtUsuario.setPromptText("Usuário");
+	    txtUsuario.setPromptText("Usuï¿½rio");
 	    txtEmail.setPromptText("Email");
 	    txtNome.setPromptText("Nome");
 	    txtDocumento.setPromptText("Documento");
-	    txtNumeroCartao.setPromptText("Número do cartão");
+	    txtNumeroCartao.setPromptText("Nï¿½mero do cartï¿½o");
 	    txtTelefone.setPromptText("Telefone");
 	    dtpDataNascimento.setPromptText("Data de nascimento");
 	    txtSenha.setPromptText("Senha");
@@ -190,7 +190,7 @@ public class CrudPassageiro extends Application {
 		p.setNome("");
 		control.setPassageiro(p);
 		try {
-			control.pesquisarPorNome();
+			control.pesquisarTodos();
 		} catch (PassageiroException e) {
 
 		}
@@ -284,7 +284,14 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void realizarUpdate(Passageiro passageiro) {
-		//puxar update
+		PassageiroControl control = new PassageiroControl();
+		control.setPassageiro(passageiro);
+		try {
+			control.atualizar();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void realizarDelete(Long passageiroId) {

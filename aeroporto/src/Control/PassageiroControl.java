@@ -63,8 +63,18 @@ public class PassageiroControl {
 		PassageiroDAO.adicionar(getPassageiro());
 	}
 	
+	public void atualizar() throws PassageiroException { 
+		PassageiroDAO.atualizar(getPassageiro());
+	}
+	
 	public void pesquisarPorNome() throws PassageiroException {
 		List<Passageiro> Passageiros = PassageiroDAO.pesquisarPorNome(this.getNomeProperty().get());
+		this.lista.clear();
+		this.lista.addAll(Passageiros);
+	}
+	
+	public void pesquisarTodos() throws PassageiroException {
+		List<Passageiro> Passageiros = PassageiroDAO.pesquisarTodos();
 		this.lista.clear();
 		this.lista.addAll(Passageiros);
 	}

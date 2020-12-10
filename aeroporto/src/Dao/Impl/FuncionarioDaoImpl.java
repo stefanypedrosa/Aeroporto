@@ -71,4 +71,33 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 		}
 		return lista;
 	}
+	
+	@Override
+	public List<Funcionario> pesquisarTodos() throws FuncionarioException {
+		List<Funcionario> lista = new ArrayList<>();
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "SELECT * FROM Funcionario";
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) { 
+				Funcionario f = new Funcionario();
+				f.setId(rs.getLong("id"));
+				f.setNome(rs.getString("nome"));
+				f.setEmail(rs.getString("email"));
+				f.setTelefone(rs.getString("telefone"));
+				f.setUsuario(rs.getString("usuario"));
+				f.setSenha(rs.getString("senha"));
+				f.setDataNascimento(rs.getDate("nascimento").toLocalDate());
+				f.setCodigo(rs.getString("codigo"));
+				f.setContaCorrente(rs.getString("contaCorrente"));
+				lista.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FuncionarioException(e);
+		}
+		return lista;
+	}
+	
 }

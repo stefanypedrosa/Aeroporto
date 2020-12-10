@@ -29,7 +29,7 @@ public class BilheteDaoImpl implements BilheteDao {
 			st.setInt(2, b.getNumero());
 			st.setString(3, b.getAssento());
 			st.setDouble(4,  b.getPesoBagagem());
-			st.setString(5, b.getSituacaoBilhete().getId());
+			st.setString(5, b.getSituacaoBilhete());
 			st.setDate(6, java.sql.Date.valueOf(b.getPartida()));
 			st.setDate(7, java.sql.Date.valueOf(b.getChegada()));
 			st.setString(8, b.getCodigoAeroporto());			
@@ -58,6 +58,7 @@ public class BilheteDaoImpl implements BilheteDao {
 				b.setNumero(rs.getInt("numero"));
 				b.setAssento(rs.getString("assento"));
 				b.setPesoBagagem(rs.getDouble("pesoBagagem"));
+				b.setSituacaoBilhete(rs.getString("situacaoBilhete"));
 				b.setPartida(rs.getDate("partida").toLocalDate());
 				b.setChegada(rs.getDate("chegada").toLocalDate());
 				b.setCodigoAeroporto(rs.getString("codigoAeroporto"));
