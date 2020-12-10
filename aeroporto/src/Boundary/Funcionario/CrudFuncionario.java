@@ -52,12 +52,17 @@ public class CrudFuncionario extends Application {
 	Button btnRemover;
 	
 	Scene scene;
+	
+	FuncionarioControl control;
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Funcionários");
 		
+		control = new FuncionarioControl();
+		
 		iniciarAtributos();
+		adicionarListener();
 		preencherTabela();
 		definirLayout();
 		
@@ -179,44 +184,22 @@ public class CrudFuncionario extends Application {
 	}
 	
 	private void preencherTabela() {
-		//ADICIONAR ENDEREÇO DEPOIS
+		try {
+	    	control.pesquisarTodos();
+	    } catch (Exception ex) {
+	    	
+	    }
+	    List<Funcionario> funcionarios = control.getLista();
 	    
-	    List<Funcionario> funcionarios = new ArrayList<Funcionario>();	//já puxar os valores do getAll aqui
-
-	    //valores de teste -- começo
-	    Funcionario teste1 = new Funcionario();
-	    Funcionario teste2 = new Funcionario();
-	    
-	    teste1.setId(1);
-	    teste1.setUsuario("teste1");
-	    teste1.setEmail("teste1@gmail.com");
-	    teste1.setNome("Teste 1");
-	    teste1.setCodigo("11122233344");
-	    teste1.setContaCorrente("121221121");
-	    teste1.setTelefone("9");
-	    teste1.setDataNascimento(LocalDate.now());
-	    teste1.setSenha("aaaaaaa");
-	    
-	    teste2.setId(2);
-	    teste2.setUsuario("teste2");
-	    teste2.setEmail("teste2@gmail.com");
-	    teste2.setNome("Teste 2");
-	    teste2.setCodigo("22222233344");
-	    teste2.setContaCorrente("222222222");
-	    teste2.setTelefone("99");
-	    teste2.setDataNascimento(LocalDate.now());
-	    
-	    teste2.setSenha("bbbbbbbb");
-	    
-	    funcionarios.add(teste1);
-	    funcionarios.add(teste2);
-	    //valores de teste -- fim
-	    
+	    tblFuncionario.getItems().clear();
+	
 	    for (Funcionario funcionario: funcionarios) {
 	    	tblFuncionario.getItems().add(funcionario);
 	    }
-	    
-	    //Listener
+	}
+	
+	private void adicionarListener() {
+		//Listener
 	    tblFuncionario.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	txtId.setText(String.valueOf(newSelection.getId()));
 	    	txtUsuario.setText(newSelection.getUsuario());
@@ -292,6 +275,8 @@ public class CrudFuncionario extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		preencherTabela();
 	}
 	
 	private void realizarUpdate(Funcionario funcionario) {
@@ -303,10 +288,21 @@ public class CrudFuncionario extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		preencherTabela();
 	}
 
 	private void realizarDelete(Long funcionarioId) {
-		//puxar delete
+		Funcionario f = new Funcionario();
+		f.setId(funcionarioId);
+		control.setFuncionario(f);
+		try {
+			control.remover();
+		} catch(Exception ex) {
+			
+		}
+		
+		preencherTabela();
 	}
 	
 }

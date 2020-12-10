@@ -79,6 +79,10 @@ private ObservableList<Funcionario> lista = FXCollections.observableArrayList();
 		this.lista.addAll(Funcionarios);
 	}
 	
+	public void remover() throws FuncionarioException {
+		FuncionarioDAO.remover(getIdProperty().get());
+	}
+	
 	public LongProperty getIdProperty() {
 		return idProperty;
 	}

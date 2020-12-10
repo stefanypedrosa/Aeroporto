@@ -10,7 +10,6 @@ import java.util.List;
 import Connection.ConnectionSingleton;
 import Dao.FuncionarioDao;
 import Entity.Funcionario;
-import Entity.Passageiro;
 import Exception.FuncionarioException;
 import Exception.PassageiroException;
 
@@ -87,7 +86,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 				f.setTelefone(rs.getString("telefone"));
 				f.setUsuario(rs.getString("usuario"));
 				f.setSenha(rs.getString("senha"));
-				f.setDataNascimento(rs.getDate("nascimento").toLocalDate());
+				f.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
 				f.setCodigo(rs.getString("codigo"));
 				f.setContaCorrente(rs.getString("contaCorrente"));
 				lista.add(f);
@@ -115,7 +114,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 				f.setTelefone(rs.getString("telefone"));
 				f.setUsuario(rs.getString("usuario"));
 				f.setSenha(rs.getString("senha"));
-				f.setDataNascimento(rs.getDate("nascimento").toLocalDate());
+				f.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
 				f.setCodigo(rs.getString("codigo"));
 				f.setContaCorrente(rs.getString("contaCorrente"));
 				lista.add(f);
@@ -125,6 +124,21 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 			throw new FuncionarioException(e);
 		}
 		return lista;
+	}
+	
+	@Override
+	public void remover(long id) throws FuncionarioException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "DELETE FROM Funcionario WHERE id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, id);
+			st.executeQuery();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FuncionarioException(e);
+		}
 	}
 	
 }
