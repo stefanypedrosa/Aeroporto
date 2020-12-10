@@ -6,7 +6,6 @@ import java.util.List;
 
 import Boundary.Mensagem;
 import Entity.Bilhete;
-import Entity.SituacaoBilhete;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,7 +28,7 @@ public class CrudBilhete extends Application{
 	private TableColumn<Bilhete, String> tcNumero;
 	private TableColumn<Bilhete, String> tcAssento;
 	private TableColumn<Bilhete, String> tcPesoBagagem;
-	private TableColumn<Bilhete, String> tcSituacao;
+	private TableColumn<Bilhete, String> tcSituacaoBilhete;
 	private TableColumn<Bilhete, String> tcChegada;
 	private TableColumn<Bilhete, String> tcPartida;
 	private TableColumn<Bilhete, String> tcCodigoAeroporto;
@@ -38,7 +37,7 @@ public class CrudBilhete extends Application{
 	private TextField txtNumero;
 	private TextField txtAssento;
 	private TextField txtPesoBagagem;
-	private TextField txtSituacao;
+	private TextField txtSituacaoBilhete;
 	private DatePicker dtpChegada;
 	private DatePicker dtpPartida;
 	private TextField txtCodigoAeroporto;
@@ -77,8 +76,8 @@ public class CrudBilhete extends Application{
 	    tcPesoBagagem = new TableColumn<>("Peso Bagagem");
 	    tcPesoBagagem.setCellValueFactory(new PropertyValueFactory<>("pesoBagagem"));
 	    
-	    tcSituacao = new TableColumn<>("Situacao");
-	    tcSituacao.setCellValueFactory(new PropertyValueFactory<>("assento"));		//trocar para situacao depois
+	    tcSituacaoBilhete = new TableColumn<>("Situacao Bilhete");
+	    tcSituacaoBilhete.setCellValueFactory(new PropertyValueFactory<>("situacaoBilhete"));		
 	    
 	    tcChegada = new TableColumn<>("Chegada");
 	    tcChegada.setCellValueFactory(new PropertyValueFactory<>("chegada"));
@@ -93,7 +92,7 @@ public class CrudBilhete extends Application{
 	    txtNumero = new TextField();
 	    txtAssento = new TextField();
 	    txtPesoBagagem = new TextField();
-	    txtSituacao = new TextField();
+	    txtSituacaoBilhete = new TextField();
 	    dtpChegada = new DatePicker();
 	    dtpPartida = new DatePicker();
 	    txtCodigoAeroporto = new TextField();
@@ -105,7 +104,7 @@ public class CrudBilhete extends Application{
 	    txtNumero.setPromptText("Número");
 	    txtAssento.setPromptText("Assento");
 	    txtPesoBagagem.setPromptText("Peso Bagagem");
-	    txtSituacao.setPromptText("Situacao");
+	    txtSituacaoBilhete.setPromptText("Situacao Bilhete");
 	    dtpChegada.setPromptText("Chegada");
 	    dtpPartida.setPromptText("Partida");
 	    txtCodigoAeroporto.setPromptText("Codigo Aeroporto");
@@ -114,7 +113,7 @@ public class CrudBilhete extends Application{
 	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.maxWidthProperty().divide(4));
-	    tcSituacao.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcSituacaoBilhete.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
@@ -123,7 +122,7 @@ public class CrudBilhete extends Application{
 	    tblBilhete.getColumns().add(tcNumero);
 	    tblBilhete.getColumns().add(tcAssento);
 	    tblBilhete.getColumns().add(tcPesoBagagem);
-	    tblBilhete.getColumns().add(tcSituacao);
+	    tblBilhete.getColumns().add(tcSituacaoBilhete);
 	    tblBilhete.getColumns().add(tcChegada);
 	    tblBilhete.getColumns().add(tcPartida);
 	    tblBilhete.getColumns().add(tcCodigoAeroporto);
@@ -214,7 +213,7 @@ public class CrudBilhete extends Application{
 	    	txtNumero.setText(String.valueOf(newSelection.getNumero()));
 	    	txtAssento.setText(newSelection.getAssento());
 	    	txtPesoBagagem.setText(String.valueOf(newSelection.getPesoBagagem()));
-	    	txtSituacao.setText(newSelection.getAssento());
+	    	txtSituacaoBilhete.setText(newSelection.getAssento());
 	    	dtpChegada.setValue(newSelection.getChegada());
 	    	dtpPartida.setValue(newSelection.getPartida());
 	    	txtCodigoAeroporto.setText(String.valueOf(newSelection.getCodigoAeroporto()));
@@ -238,7 +237,7 @@ public class CrudBilhete extends Application{
 	    grid.add(txtNumero, 2, 2);
 	    grid.add(txtAssento, 3, 2);
 	    grid.add(txtPesoBagagem, 4, 2);
-	    grid.add(txtSituacao, 5, 2);
+	    grid.add(txtSituacaoBilhete, 5, 2);
 	    grid.add(dtpChegada, 6, 2);
 	    grid.add(dtpPartida, 7, 2);
 	    grid.add(txtCodigoAeroporto, 8, 2);
@@ -255,17 +254,7 @@ public class CrudBilhete extends Application{
 		bilhete.setNumero(Integer.parseInt(txtNumero.getText()));
 		bilhete.setAssento(txtAssento.getText());
 		bilhete.setPesoBagagem(Double.parseDouble(txtPesoBagagem.getText()));
-		switch (txtAssento.getText()) {
-			case "DISPONIVEL":
-				bilhete.setSituacaoBilhete(SituacaoBilhete.DISPONIVEL);
-				break;
-			case "RESERVADO":
-				bilhete.setSituacaoBilhete(SituacaoBilhete.RESERVADO);
-				break;
-			case "VENDIDO":
-				bilhete.setSituacaoBilhete(SituacaoBilhete.VENDIDO);
-				break;
-		}
+		bilhete.setSituacaoBilhete(txtSituacaoBilhete.getText());
 		bilhete.setChegada(dtpChegada.getValue());
 		bilhete.setPartida(dtpPartida.getValue());
 		bilhete.setCodigoAeroporto(txtCodigoAeroporto.getText());
@@ -275,8 +264,8 @@ public class CrudBilhete extends Application{
 	
 	private boolean validarCampos() {
 		if (!txtId.getText().equals("") && !txtNumero.getText().equals("") && !txtAssento.getText().equals("")
-				&& (txtSituacao.getText().equals("DISPONIVEL") || txtSituacao.getText().equals("RESERVADO")
-				|| txtSituacao.getText().equals("VENDIDO"))) {
+				&& (txtSituacaoBilhete.getText().equals("DISPONIVEL") || txtSituacaoBilhete.getText().equals("RESERVADO")
+				|| txtSituacaoBilhete.getText().equals("VENDIDO"))) {
 			return true;
 		} else {
 			return false;
