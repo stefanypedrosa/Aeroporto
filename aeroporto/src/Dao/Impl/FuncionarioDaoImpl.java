@@ -10,7 +10,9 @@ import java.util.List;
 import Connection.ConnectionSingleton;
 import Dao.FuncionarioDao;
 import Entity.Funcionario;
+import Entity.Passageiro;
 import Exception.FuncionarioException;
+import Exception.PassageiroException;
 
 public class FuncionarioDaoImpl implements FuncionarioDao{
 
@@ -42,6 +44,31 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 		}
 
 	}
+	
+	@Override
+	public void atualizar(Funcionario f) throws FuncionarioException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "UPDATE Passageiro SET id = ?, nome = ?, email = ?, telefone = ?, usuario = ?, senha = ?, dataNascimento = ?, documento = ?, numeroCartao = ?; "; 
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, f.getId());
+			st.setString(2, f.getNome());
+			st.setString(3, f.getEmail());
+			st.setString(4,  f.getTelefone());
+			st.setString(5, f.getUsuario());
+			st.setString(6, f.getSenha());
+			st.setDate(7, java.sql.Date.valueOf(f.getDataNascimento()));
+			st.setString(8, f.getCodigo());
+			st.setString(9, f.getContaCorrente());
+			st.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FuncionarioException(e);
+		}
+
+	}
+	
 
 	@Override
 	public List<Funcionario> pesquisarPorNome(String nome) throws FuncionarioException {

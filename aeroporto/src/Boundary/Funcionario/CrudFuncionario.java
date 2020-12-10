@@ -7,6 +7,7 @@ import java.util.List;
 import Boundary.Mensagem;
 import Control.FuncionarioControl;
 import Entity.Funcionario;
+import Entity.Passageiro;
 import Exception.FuncionarioException;
 import Exception.PassageiroException;
 import javafx.application.Application;
@@ -261,10 +262,12 @@ public class CrudFuncionario extends Application {
 		retornoFuncionario.setId(Long.parseLong(txtId.getText()));
 		retornoFuncionario.setUsuario(txtUsuario.getText());
 		retornoFuncionario.setNome(txtNome.getText());
+		retornoFuncionario.setEmail(txtEmail.getText());
 		retornoFuncionario.setCodigo(txtCodigo.getText());
 		retornoFuncionario.setContaCorrente(txtContaCorrente.getText());
-		retornoFuncionario.setUsuario(txtTelefone.getText());
-		retornoFuncionario.setUsuario(txtSenha.getText());
+		retornoFuncionario.setTelefone(txtTelefone.getText());
+		retornoFuncionario.setSenha(txtSenha.getText());
+		retornoFuncionario.setDataNascimento(dtpDataNascimento.getValue());
 		
 		return retornoFuncionario;
 	}
@@ -292,7 +295,14 @@ public class CrudFuncionario extends Application {
 	}
 	
 	private void realizarUpdate(Funcionario funcionario) {
-		//puxar update
+		FuncionarioControl control = new FuncionarioControl();
+		control.setFuncionario(funcionario);
+		try {
+			control.atualizar();
+		} catch (FuncionarioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void realizarDelete(Long funcionarioId) {
