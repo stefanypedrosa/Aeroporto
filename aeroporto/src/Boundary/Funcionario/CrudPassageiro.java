@@ -76,7 +76,7 @@ public class CrudPassageiro extends Application {
 	    tcId = new TableColumn<>("ID");
 	    tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-	    tcUsuario = new TableColumn<>("Usu�rio");
+	    tcUsuario = new TableColumn<>("Usuario");
 	    tcUsuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 	    
 	    tcEmail = new TableColumn<>("Email");
@@ -88,17 +88,14 @@ public class CrudPassageiro extends Application {
 	    tcDocumento = new TableColumn<>("Documento");
 	    tcDocumento.setCellValueFactory(new PropertyValueFactory<>("documento"));
 	    
-	    tcNumeroCartao = new TableColumn<>("N�mero do cart�o");
+	    tcNumeroCartao = new TableColumn<>("Numero do cartao");
 	    tcNumeroCartao.setCellValueFactory(new PropertyValueFactory<>("numeroCartao"));
 	    
 	    tcTelefone = new TableColumn<>("Telefone");
-	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));	//mudar para telefone
+	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 	    
 	    tcDataNascimento = new TableColumn<>("Data de nascimento");
 	    tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
-	    
-//	    tcEndereco = new TableColumn<>("Endere�o");
-//	    tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 	    
 	    tcSenha = new TableColumn<>("Senha");
 	    tcSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
@@ -121,7 +118,7 @@ public class CrudPassageiro extends Application {
 	    txtEmail.setPromptText("Email");
 	    txtNome.setPromptText("Nome");
 	    txtDocumento.setPromptText("Documento");
-	    txtNumeroCartao.setPromptText("N�mero do cart�o");
+	    txtNumeroCartao.setPromptText("Numero do cartao");
 	    txtTelefone.setPromptText("Telefone");
 	    dtpDataNascimento.setPromptText("Data de nascimento");
 	    txtSenha.setPromptText("Senha");
@@ -186,9 +183,6 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void preencherTabela() {
-		Passageiro p = new Passageiro();
-		p.setNome("");
-		control.setPassageiro(p);
 		try {
 			control.pesquisarTodos();
 		} catch (PassageiroException e) {
@@ -284,7 +278,6 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void realizarUpdate(Passageiro passageiro) {
-		PassageiroControl control = new PassageiroControl();
 		control.setPassageiro(passageiro);
 		try {
 			control.atualizar();
@@ -292,6 +285,8 @@ public class CrudPassageiro extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		preencherTabela();
 	}
 
 	private void realizarDelete(Long passageiroId) {
