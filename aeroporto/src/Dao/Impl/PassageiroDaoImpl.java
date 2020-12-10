@@ -51,6 +51,7 @@ public class PassageiroDaoImpl implements PassageiroDao{
 			String sql = "SELECT * FROM Passageiro WHERE nome like ?";
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1, "%" + nome + "%");
+			System.out.println(nome);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) { 
 				Passageiro p = new Passageiro();
@@ -60,7 +61,7 @@ public class PassageiroDaoImpl implements PassageiroDao{
 				p.setTelefone(rs.getString("telefone"));
 				p.setUsuario(rs.getString("usuario"));
 				p.setSenha(rs.getString("senha"));
-				p.setDataNascimento(rs.getDate("nascimento").toLocalDate());
+				p.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
 				p.setDocumento(rs.getString("documento"));
 				p.setNumeroCartao(rs.getString("numeroCartao"));
 				lista.add(p);

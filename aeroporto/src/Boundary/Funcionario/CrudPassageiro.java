@@ -61,6 +61,7 @@ public class CrudPassageiro extends Application {
 		control = new PassageiroControl();
 		
 		iniciarAtributos();
+		adicionarListener();
 		preencherTabela();
 		definirLayout();
 		
@@ -185,20 +186,25 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void preencherTabela() {
-		control.setPassageiro(new Passageiro());
+		Passageiro p = new Passageiro();
+		p.setNome("");
+		control.setPassageiro(p);
 		try {
 			control.pesquisarPorNome();
 		} catch (PassageiroException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 	    List<Passageiro> passageiros = control.getLista();
+	    
+	    tblPassageiro.getItems().clear();
 	    
 	    for (Passageiro passageiro: passageiros) {
 	    	tblPassageiro.getItems().add(passageiro);
 	    }
-	    
-	    //Listener
+	}
+	
+	private void adicionarListener() {
+		//Listener
 	    tblPassageiro.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	txtId.setText(String.valueOf(newSelection.getId()));
 	    	txtUsuario.setText(newSelection.getUsuario());
@@ -244,10 +250,12 @@ public class CrudPassageiro extends Application {
 		retornoPassageiro.setId(Long.parseLong(txtId.getText()));
 		retornoPassageiro.setUsuario(txtUsuario.getText());
 		retornoPassageiro.setNome(txtNome.getText());
+		retornoPassageiro.setEmail(txtEmail.getText());
 		retornoPassageiro.setDocumento(txtDocumento.getText());
 		retornoPassageiro.setNumeroCartao(txtNumeroCartao.getText());
-		retornoPassageiro.setUsuario(txtTelefone.getText());
-		retornoPassageiro.setUsuario(txtSenha.getText());
+		retornoPassageiro.setTelefone(txtTelefone.getText());
+		retornoPassageiro.setDataNascimento(dtpDataNascimento.getValue());
+		retornoPassageiro.setSenha(txtSenha.getText());
 		
 		return retornoPassageiro;
 	}
@@ -264,7 +272,15 @@ public class CrudPassageiro extends Application {
 	}
 	
 	private void realizarInsert(Passageiro passageiro) {
-		//puxar insert da controller
+		control.setPassageiro(passageiro);
+		try {
+			control.adicionar();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		preencherTabela();
 	}
 	
 	private void realizarUpdate(Passageiro passageiro) {
