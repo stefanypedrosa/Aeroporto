@@ -1,15 +1,11 @@
 package Boundary.Funcionario;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
 import Control.FuncionarioControl;
 import Entity.Funcionario;
-import Entity.Passageiro;
 import Exception.FuncionarioException;
-import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
