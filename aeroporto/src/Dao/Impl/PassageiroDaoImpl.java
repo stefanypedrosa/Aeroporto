@@ -48,7 +48,7 @@ public class PassageiroDaoImpl implements PassageiroDao{
 	public void atualizar(Passageiro p) throws PassageiroException {
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "UPDATE Passageiro SET id = ?, nome = ?, email = ?, telefone = ?, usuario = ?, senha = ?, dataNascimento = ?, documento = ?, numeroCartao = ?; "; 
+			String sql = "UPDATE Passageiro SET id = ?, nome = ?, email = ?, telefone = ?, usuario = ?, senha = ?, dataNascimento = ?, documento = ?, numeroCartao = ? WHERE id = ?; "; 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setLong(1, p.getId());
 			st.setString(2, p.getNome());
@@ -59,6 +59,7 @@ public class PassageiroDaoImpl implements PassageiroDao{
 			st.setDate(7, java.sql.Date.valueOf(p.getDataNascimento()));
 			st.setString(8, p.getDocumento());
 			st.setString(9, p.getNumeroCartao());
+			st.setLong(10, p.getId());
 			st.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
