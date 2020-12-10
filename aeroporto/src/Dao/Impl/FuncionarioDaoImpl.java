@@ -19,21 +19,21 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 
 	
 	@Override
-	public void adicionar(Funcionario p) throws FuncionarioException {
+	public void adicionar(Funcionario f) throws FuncionarioException {
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
 			String sql = "INSERT INTO Funcionario (id, nome, email, telefone, usuario, senha, dataNascimento, codigo, contaCorrente) " + 
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setLong(1, p.getId());
-			st.setString(2, p.getNome());
-			st.setString(3, p.getEmail());
-			st.setString(4,  p.getTelefone());
-			st.setString(5, p.getUsuario());
-			st.setString(6, p.getSenha());
-			st.setDate(7, java.sql.Date.valueOf(p.getDataNascimento()));
-			st.setString(8, p.getCodigo());
-			st.setString(9, p.getContaCorrente());
+			st.setLong(1, f.getId());
+			st.setString(2, f.getNome());
+			st.setString(3, f.getEmail());
+			st.setString(4,  f.getTelefone());
+			st.setString(5, f.getUsuario());
+			st.setString(6, f.getSenha());
+			st.setDate(7, java.sql.Date.valueOf(f.getDataNascimento()));
+			st.setString(8, f.getCodigo());
+			st.setString(9, f.getContaCorrente());
 			st.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
@@ -53,17 +53,17 @@ public class FuncionarioDaoImpl implements FuncionarioDao{
 			st.setString(1, "%" + nome + "%");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) { 
-				Funcionario p = new Funcionario();
-				p.setId(rs.getLong("id"));
-				p.setNome(rs.getString("nome"));
-				p.setEmail(rs.getString("email"));
-				p.setTelefone(rs.getString("telefone"));
-				p.setUsuario(rs.getString("usuario"));
-				p.setSenha(rs.getString("senha"));
-				p.setDataNascimento(rs.getDate("nascimento").toLocalDate());
-				p.setCodigo(rs.getString("codigo"));
-				p.setContaCorrente(rs.getString("contaCorrente"));
-				lista.add(p);
+				Funcionario f = new Funcionario();
+				f.setId(rs.getLong("id"));
+				f.setNome(rs.getString("nome"));
+				f.setEmail(rs.getString("email"));
+				f.setTelefone(rs.getString("telefone"));
+				f.setUsuario(rs.getString("usuario"));
+				f.setSenha(rs.getString("senha"));
+				f.setDataNascimento(rs.getDate("nascimento").toLocalDate());
+				f.setCodigo(rs.getString("codigo"));
+				f.setContaCorrente(rs.getString("contaCorrente"));
+				lista.add(f);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

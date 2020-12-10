@@ -32,30 +32,30 @@ private ObservableList<Funcionario> lista = FXCollections.observableArrayList();
 	private FuncionarioDao FuncionarioDAO = new FuncionarioDaoImpl();
 	
 	public Funcionario getFuncionario() { 
-		Funcionario p = new Funcionario();
-		p.setId(idProperty.get());
-		p.setNome(nomeProperty.get());
-		p.setTelefone(telefoneProperty.get());
-		p.setEmail(emailProperty.get());
-		p.setDataNascimento(dataNascimentoProperty.get());
-		p.setUsuario(usuarioProperty.get());
-		p.setSenha(senhaProperty.get());
-		p.setCodigo(codigoProperty.get());
-		p.setContaCorrente(contaCorrenteProperty.get());
-		return p;
+		Funcionario f = new Funcionario();
+		f.setId(idProperty.get());
+		f.setNome(nomeProperty.get());
+		f.setTelefone(telefoneProperty.get());
+		f.setEmail(emailProperty.get());
+		f.setDataNascimento(dataNascimentoProperty.get());
+		f.setUsuario(usuarioProperty.get());
+		f.setSenha(senhaProperty.get());
+		f.setCodigo(codigoProperty.get());
+		f.setContaCorrente(contaCorrenteProperty.get());
+		return f;
 	}
 	
-	public void setFuncionario(Funcionario p) { 
-		if (p != null)  { 
-			idProperty.set(p.getId());
-			nomeProperty.set(p.getNome());
-			telefoneProperty.set(p.getTelefone());
-			emailProperty.set(p.getEmail());
-			dataNascimentoProperty.set(p.getDataNascimento());
-			usuarioProperty.set(p.getUsuario());
-			senhaProperty.set(p.getSenha());
-			codigoProperty.set(p.getCodigo());
-			contaCorrenteProperty.set(p.getContaCorrente());
+	public void setFuncionario(Funcionario f) { 
+		if (f != null)  { 
+			idProperty.set(f.getId());
+			nomeProperty.set(f.getNome());
+			telefoneProperty.set(f.getTelefone());
+			emailProperty.set(f.getEmail());
+			dataNascimentoProperty.set(f.getDataNascimento());
+			usuarioProperty.set(f.getUsuario());
+			senhaProperty.set(f.getSenha());
+			codigoProperty.set(f.getCodigo());
+			contaCorrenteProperty.set(f.getContaCorrente());
 		}
 	}
 	
