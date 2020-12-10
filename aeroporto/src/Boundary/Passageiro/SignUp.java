@@ -90,7 +90,7 @@ public class SignUp extends Application {
             		newPassageiro.setNome(txtNome.getText());
             		newPassageiro.setDocumento(txtDocumento.getText());
             		newPassageiro.setNumeroCartao(txtNumeroCartao.getText());
-            		newPassageiro.setTeleone(txtTelefone.getText());		//mudar para telefone
+            		newPassageiro.setTelefone(txtTelefone.getText());		//mudar para telefone
             		newPassageiro.setDataNascimento(dtpNascimento.getValue());
             		newEndereco.setId(Integer.parseInt(txtIdEndereco.getText()));
             		newEndereco.setPais(txtPais.getText());

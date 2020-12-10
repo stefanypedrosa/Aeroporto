@@ -189,7 +189,7 @@ public class CrudFuncionario extends Application {
 	    teste1.setNome("Teste 1");
 	    teste1.setCodigo("11122233344");
 	    teste1.setContaCorrente("121221121");
-	    teste1.setTeleone("9");
+	    teste1.setTelefone("9");
 	    teste1.setDataNascimento(LocalDate.now());
 	    teste1.setSenha("aaaaaaa");
 	    
@@ -199,7 +199,7 @@ public class CrudFuncionario extends Application {
 	    teste2.setNome("Teste 2");
 	    teste2.setCodigo("22222233344");
 	    teste2.setContaCorrente("222222222");
-	    teste2.setTeleone("99");
+	    teste2.setTelefone("99");
 	    teste2.setDataNascimento(LocalDate.now());
 	    
 	    teste2.setSenha("bbbbbbbb");
@@ -220,7 +220,7 @@ public class CrudFuncionario extends Application {
 	    	txtNome.setText(newSelection.getNome());
 	    	txtCodigo.setText(newSelection.getCodigo());
 	    	txtContaCorrente.setText(newSelection.getContaCorrente());
-	    	txtTelefone.setText(newSelection.getTeleone());		//mudar para telefone
+	    	txtTelefone.setText(newSelection.getTelefone());		//mudar para telefone
 	    	dtpDataNascimento.setValue(newSelection.getDataNascimento());
 	    	txtSenha.setText(newSelection.getSenha());
 	    });

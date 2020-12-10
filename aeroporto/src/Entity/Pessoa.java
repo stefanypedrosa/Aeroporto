@@ -30,10 +30,10 @@ public class Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTeleone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTeleone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public String getUsuario() {

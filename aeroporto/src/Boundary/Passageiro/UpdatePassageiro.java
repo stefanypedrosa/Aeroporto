@@ -82,7 +82,7 @@ public class UpdatePassageiro extends Application {
             		newPassageiro.setNome(txtNome.getText());
             		newPassageiro.setDocumento(txtDocumento.getText());
             		newPassageiro.setNumeroCartao(txtNumeroCartao.getText());
-            		newPassageiro.setTeleone(txtTelefone.getText());		//mudar para telefone
+            		newPassageiro.setTelefone(txtTelefone.getText());		//mudar para telefone
             		newPassageiro.setDataNascimento(dtpNascimento.getValue());
             		newEndereco.setId(Integer.parseInt(txtIdEndereco.getText()));
             		newEndereco.setPais(txtPais.getText());
@@ -117,7 +117,7 @@ public class UpdatePassageiro extends Application {
         txtNome.setText(oldPassageiro.getNome());
         txtDocumento.setText(oldPassageiro.getDocumento());
         txtNumeroCartao.setText(oldPassageiro.getNumeroCartao());
-        txtTelefone.setText(oldPassageiro.getTeleone());
+        txtTelefone.setText(oldPassageiro.getTelefone());
         dtpNascimento.setValue(oldPassageiro.getDataNascimento());
         txtSenha.setText(oldPassageiro.getSenha());
         

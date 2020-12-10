@@ -31,7 +31,7 @@ public class CrudPassageiro extends Application {
 	private TableColumn<Passageiro, String> tcNumeroCartao;
 	private TableColumn<Passageiro, String> tcTelefone;
 	private TableColumn<Passageiro, String> tcDataNascimento;
-	private TableColumn<Passageiro, String> tcEndereco;
+//	private TableColumn<Passageiro, String> tcEndereco;
 	private TableColumn<Passageiro, String> tcSenha;
 	
 	private TextField txtId;
@@ -86,13 +86,13 @@ public class CrudPassageiro extends Application {
 	    tcNumeroCartao.setCellValueFactory(new PropertyValueFactory<>("numeroCartao"));
 	    
 	    tcTelefone = new TableColumn<>("Telefone");
-	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("teleone"));	//mudar para telefone
+	    tcTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));	//mudar para telefone
 	    
 	    tcDataNascimento = new TableColumn<>("Data de nascimento");
 	    tcDataNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
 	    
-	    tcEndereco = new TableColumn<>("Endereço");
-	    tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+//	    tcEndereco = new TableColumn<>("Endereço");
+//	    tcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 	    
 	    tcSenha = new TableColumn<>("Senha");
 	    tcSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
@@ -194,7 +194,7 @@ public class CrudPassageiro extends Application {
 	    teste1.setNome("Teste 1");
 	    teste1.setDocumento("11122233344");
 	    teste1.setNumeroCartao("121221121");
-	    teste1.setTeleone("9");
+	    teste1.setTelefone("9");
 	    teste1.setDataNascimento(LocalDate.now());
 	    teste1.setSenha("aaaaaaa");
 	    
@@ -204,7 +204,7 @@ public class CrudPassageiro extends Application {
 	    teste2.setNome("Teste 2");
 	    teste2.setDocumento("22222233344");
 	    teste2.setNumeroCartao("222222222");
-	    teste2.setTeleone("99");
+	    teste2.setTelefone("99");
 	    teste2.setDataNascimento(LocalDate.now());
 	    teste2.setSenha("bbbbbbbb");
 	    
@@ -224,7 +224,7 @@ public class CrudPassageiro extends Application {
 	    	txtNome.setText(newSelection.getNome());
 	    	txtDocumento.setText(newSelection.getDocumento());
 	    	txtNumeroCartao.setText(newSelection.getNumeroCartao());
-	    	txtTelefone.setText(newSelection.getTeleone());		//mudar para telefone
+	    	txtTelefone.setText(newSelection.getTelefone());		//mudar para telefone
 	    	dtpDataNascimento.setValue(newSelection.getDataNascimento());
 	    	txtSenha.setText(newSelection.getSenha());
 	    });

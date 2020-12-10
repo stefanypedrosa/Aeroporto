@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionSingleton {
 	
-	private static final String URLCON = "jdbc:mariadb://localhost:3306/contatodb";
+	private static final String URLCON = "jdbc:mariadb://localhost:3306/aeroportoDB";
 	private static final String USER = "root";
 	private static final String PASS = "";
 	
