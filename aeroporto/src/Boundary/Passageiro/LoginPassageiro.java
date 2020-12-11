@@ -1,6 +1,5 @@
 package Boundary.Passageiro;
 
-
 import java.util.List;
 
 import Boundary.Entrada;
