@@ -11,7 +11,6 @@ import Connection.ConnectionSingleton;
 import Dao.FuncionarioDao;
 import Entity.Funcionario;
 import Exception.FuncionarioException;
-import Exception.PassageiroException;
 
 public class FuncionarioDaoImpl implements FuncionarioDao{
 
