@@ -6,7 +6,6 @@ import java.util.List;
 import Boundary.Mensagem;
 import Control.BilheteControl;
 import Entity.Bilhete;
-import Exception.AviaoException;
 import Exception.BilheteException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

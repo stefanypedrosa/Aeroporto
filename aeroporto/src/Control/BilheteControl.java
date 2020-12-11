@@ -82,6 +82,10 @@ private ObservableList<Bilhete> lista = FXCollections.observableArrayList();
 		this.lista.addAll(Bilhetes);
 	}
 	
+	public void remover() throws BilheteException {
+		BilheteDAO.remover(getIdProperty().get());
+	}
+	
 	
 	public LongProperty getIdProperty() {
 		return idProperty;

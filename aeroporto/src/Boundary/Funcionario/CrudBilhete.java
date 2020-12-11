@@ -4,7 +4,6 @@ import java.util.List;
 
 import Boundary.Mensagem;
 import Control.BilheteControl;
-import Entity.Aviao;
 import Entity.Bilhete;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
