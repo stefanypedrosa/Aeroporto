@@ -1,8 +1,10 @@
 package Boundary.Passageiro;
 
 import Boundary.Mensagem;
+import Control.PassageiroControl;
 import Entity.Endereco;
 import Entity.Passageiro;
+import Exception.PassageiroException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,7 +22,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class UpdatePassageiro extends Application {
-
+	
+	private PassageiroControl control;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
@@ -170,7 +174,13 @@ public class UpdatePassageiro extends Application {
 	}
 	
 	private void realizarUpdate(Passageiro passageiro) {
-		//lógica de update aqui
+		control.setPassageiro(passageiro);
+		try {
+			control.atualizar();
+		} catch (PassageiroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
