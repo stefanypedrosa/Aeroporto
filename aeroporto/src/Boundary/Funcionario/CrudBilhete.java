@@ -53,6 +53,8 @@ public class CrudBilhete extends Application{
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Bilhetes");
 		
+		control = new BilheteControl();
+		
 		iniciarAtributos();
 		preencherTabela();
 		adicionarListener();
@@ -111,14 +113,14 @@ public class CrudBilhete extends Application{
 	    dtpPartida.setPromptText("Partida");
 	    txtCodigoAeroporto.setPromptText("Codigo Aeroporto");
 	    
-	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.maxWidthProperty().divide(4));
-	    tcSituacaoBilhete.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcSituacaoBilhete.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
 
 	    tblBilhete.getColumns().add(tcId);
 	    tblBilhete.getColumns().add(tcNumero);
@@ -184,7 +186,7 @@ public class CrudBilhete extends Application{
 	    } catch (Exception ex) {
 	    	
 	    }
-	    List<Bilhete> bilhetes = control.getLista();	//já puxar os valores do getAll aqui
+	    List<Bilhete> bilhetes = control.getLista();
 
 	    tblBilhete.getItems().clear();
 	    
@@ -224,15 +226,15 @@ public class CrudBilhete extends Application{
 	    grid.add(txtNumero, 2, 2);
 	    grid.add(txtAssento, 3, 2);
 	    grid.add(txtPesoBagagem, 4, 2);
-	    grid.add(txtSituacaoBilhete, 5, 2);
-	    grid.add(dtpChegada, 6, 2);
-	    grid.add(dtpPartida, 7, 2);
-	    grid.add(txtCodigoAeroporto, 8, 2);
-	    grid.add(btnAdicionar, 1, 3);
-	    grid.add(btnAtualizar, 2, 3, 2, 1);
-	    grid.add(btnRemover, 4, 3);
+	    grid.add(txtSituacaoBilhete, 1, 3);
+	    grid.add(dtpChegada, 2, 3);
+	    grid.add(dtpPartida, 3, 3);
+	    grid.add(txtCodigoAeroporto, 4, 3);
+	    grid.add(btnAdicionar, 1, 4);
+	    grid.add(btnAtualizar, 2, 4, 2, 1);
+	    grid.add(btnRemover, 4, 4);
 
-	    scene = new Scene(grid, 420, 480);
+	    scene = new Scene(grid, 670, 500);
 	}
 	
 	private Bilhete transformarObjeto() {

@@ -48,7 +48,7 @@ public class BilheteDaoImpl implements BilheteDao {
 	public void atualizar(Bilhete b) throws BilheteException {
 		try {
 			Connection con = ConnectionSingleton.instancia().connection();
-			String sql = "UPDATE Aviao SET id = ?, codigo = ?, vagas = ?, ciaAerea = ? WHERE id = ?; "; 
+			String sql = "UPDATE Bilhete SET id = ?, numero = ?, assento = ?, pesoBagagem = ?, situacaoBilhete = ?, partida = ?, chegada = ?, CodigoAeroporto = ? WHERE id = ?; "; 
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setLong(1, b.getId());
 			st.setInt(2, b.getNumero());
@@ -57,7 +57,8 @@ public class BilheteDaoImpl implements BilheteDao {
 			st.setString(5, b.getSituacaoBilhete());
 			st.setDate(6, java.sql.Date.valueOf(b.getPartida()));
 			st.setDate(7, java.sql.Date.valueOf(b.getChegada()));
-			st.setString(8, b.getCodigoAeroporto());	
+			st.setString(8, b.getCodigoAeroporto());
+			st.setLong(9, b.getId());
 			st.executeUpdate();
 			con.close();
 		} catch (SQLException e) {

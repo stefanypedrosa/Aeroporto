@@ -1,6 +1,5 @@
 package Boundary.Passageiro;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
@@ -46,6 +45,7 @@ public class AdquirirBilhete extends Application {
 		stage.setTitle("Bilhetes");
 		
 		iniciarAtributos();
+		adicionarEventos();
 		preencherTabela();
 		definirLayout();
 		
@@ -83,15 +83,6 @@ public class AdquirirBilhete extends Application {
 	    
 	    btnReservar = new Button("Reservar");
 	    btnComprar = new Button("Comprar");
-	    
-	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.maxWidthProperty().divide(4));
-	    tcSituacao.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
 
 	    tblBilhete.getColumns().add(tcId);
 	    tblBilhete.getColumns().add(tcNumero);
@@ -104,14 +95,22 @@ public class AdquirirBilhete extends Application {
 	}
 	
 	private void preencherTabela() {
-	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
+		try {
+	    	control.pesquisarTodos();
+	    } catch (Exception ex) {
+	    	
+	    }
+	    List<Bilhete> bilhetes = control.getLista();
+
+	    tblBilhete.getItems().clear();
 	    
 	    for (Bilhete bilhete: bilhetes) {
-	    	if(bilhete.getSituacaoBilhete().equals("DISPONIVEL") || bilhete.getSituacaoBilhete().equals("RESERVADO"))
-	    		tblBilhete.getItems().add(bilhete);
+	    	tblBilhete.getItems().add(bilhete);
 	    }
-	    
-	    //Listener
+	}
+	
+	private void adicionarEventos() {
+		//Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	selectedBilhete = newSelection;
 	    });
@@ -120,7 +119,7 @@ public class AdquirirBilhete extends Application {
 	    btnComprar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete().equals("DISPONIVEL") || selectedBilhete.getSituacaoBilhete().equals("RESERVADO")) {
+            	if (selectedBilhete != null) {
             		realizarCompra(selectedBilhete);
             	} else {
             		Stage newStage = new Stage();
@@ -133,7 +132,7 @@ public class AdquirirBilhete extends Application {
 	    btnReservar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete().equals("DISPONIVEL")) {
+            	if (selectedBilhete != null) {
             		realizarReserva(selectedBilhete);
             	} else {
             		Stage newStage = new Stage();
@@ -160,7 +159,7 @@ public class AdquirirBilhete extends Application {
 	    grid.add(btnComprar, 1, 2);
 	    grid.add(btnReservar, 1, 3);
 
-	    scene = new Scene(grid, 250, 245);
+	    scene = new Scene(grid, 650, 245);
 	}
 	
 	private void realizarCompra(Bilhete bilhete) {

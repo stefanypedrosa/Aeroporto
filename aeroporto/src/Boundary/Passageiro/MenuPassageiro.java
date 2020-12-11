@@ -19,31 +19,14 @@ public class MenuPassageiro extends Application {
 		// TODO Auto-generated method stub
 		stage.setTitle("Menu");
 		
-		Label titulo = new Label("Bem vindo, passageiro!");		//nome do current passageiro
-		Button btnAlterar = new Button("Alterar informações");
+		Label titulo = new Label("Bem vindo, passageiro!");
         Button btnCheckIn = new Button("Check In");
         Button btnBilhete = new Button("Bilhetes");
         
         titulo.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
         
-        btnAlterar.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnCheckIn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         btnBilhete.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        
-        btnAlterar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //ir alterar perfil de usuário
-            	UpdatePassageiro updatePassageiro = new UpdatePassageiro();
-            	try {
-            		Stage newStage = new Stage();
-					updatePassageiro.start(newStage);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        });
         
         btnCheckIn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -80,14 +63,13 @@ public class MenuPassageiro extends Application {
         grid.setVgap(10);
         
         grid.add(titulo, 1, 1, 2, 1);
-        grid.add(btnAlterar, 1, 2, 2, 1);
-        grid.add(btnCheckIn, 1, 3, 2, 1);
-        grid.add(btnBilhete, 1, 4, 2, 1);
+        grid.add(btnCheckIn, 1, 2, 2, 1);
+        grid.add(btnBilhete, 1, 3, 2, 1);
         
         GridPane.setHalignment(titulo, HPos.CENTER);
 		
 		stage.setResizable(false);
-		stage.setScene(new Scene(grid, 220, 150));
+		stage.setScene(new Scene(grid, 220, 120));
 		stage.show();
 	}
 	

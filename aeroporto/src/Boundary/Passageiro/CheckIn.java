@@ -1,6 +1,5 @@
 package Boundary.Passageiro;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
@@ -46,6 +45,7 @@ public class CheckIn extends Application {
 		
 		iniciarAtributos();
 		preencherTabela();
+		adicionarListener();
 		definirLayout();
 		
 		stage.setResizable(false);
@@ -82,14 +82,14 @@ public class CheckIn extends Application {
 	    
 	    btnCheckIn = new Button("Check In");
 	    
-	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.maxWidthProperty().divide(4));
-	    tcSituacao.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
-	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(4));
+//	    tcId.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcNumero.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcAssento.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcPesoBagagem.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcSituacao.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcChegada.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcPartida.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
+//	    tcCodigoAeroporto.prefWidthProperty().bind(tblBilhete.widthProperty().divide(8));
 
 	    tblBilhete.getColumns().add(tcId);
 	    tblBilhete.getColumns().add(tcNumero);
@@ -105,7 +105,7 @@ public class CheckIn extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //ir para tela de signUp
-            	if (selectedBilhete != null && selectedBilhete.getSituacaoBilhete().equals("COMPRADO")) {
+            	if (selectedBilhete != null) {
     	            	try {
     	            		realizarCheckIn(selectedBilhete);
     					} catch (Exception e) {
@@ -122,14 +122,21 @@ public class CheckIn extends Application {
 	}
 	
 	private void preencherTabela() {
-	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
+		try {
+	    	control.pesquisarTodos();
+	    } catch (Exception ex) {
+	    	
+	    }
+	    List<Bilhete> bilhetes = control.getLista();
 
+	    tblBilhete.getItems().clear();
 	    
 	    for (Bilhete bilhete: bilhetes) {
-	    	if(bilhete.getSituacaoBilhete().equals("COMPRADO"))
-	    		tblBilhete.getItems().add(bilhete);
+	    	tblBilhete.getItems().add(bilhete);
 	    }
-	    
+	}
+	
+	private void adicionarListener() {
 	    //Listener
 	    tblBilhete.getSelectionModel().selectedItemProperty().addListener((observable, oldSelection, newSelection) -> {
 	    	selectedBilhete = newSelection;
@@ -149,7 +156,7 @@ public class CheckIn extends Application {
 	    grid.add(tblBilhete, 1, 1, 2, 1);
 	    grid.add(btnCheckIn, 1, 3, 2, 1);
 
-	    scene = new Scene(grid, 320, 480);
+	    scene = new Scene(grid, 650, 450);
 	}
 	
 	private void realizarCheckIn(Bilhete bilhete) {
