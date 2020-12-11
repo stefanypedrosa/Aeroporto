@@ -42,6 +42,31 @@ public class BilheteDaoImpl implements BilheteDao {
 		}
 
 	}
+	
+	
+	@Override
+	public void atualizar(Bilhete b) throws BilheteException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "UPDATE Aviao SET id = ?, codigo = ?, vagas = ?, ciaAerea = ? WHERE id = ?; "; 
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, b.getId());
+			st.setInt(2, b.getNumero());
+			st.setString(3, b.getAssento());
+			st.setDouble(4,  b.getPesoBagagem());
+			st.setString(5, b.getSituacaoBilhete());
+			st.setDate(6, java.sql.Date.valueOf(b.getPartida()));
+			st.setDate(7, java.sql.Date.valueOf(b.getChegada()));
+			st.setString(8, b.getCodigoAeroporto());	
+			st.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BilheteException(e);
+		}
+
+	}
+	
 
 	@Override
 	public List<Bilhete> pesquisarPorNumero(int numero) throws BilheteException {
@@ -96,6 +121,21 @@ public class BilheteDaoImpl implements BilheteDao {
 			throw new BilheteException(e);
 		}
 		return lista;
+	}
+	
+	@Override
+	public void remover(long id) throws BilheteException {
+		try {
+			Connection con = ConnectionSingleton.instancia().connection();
+			String sql = "DELETE FROM bilhete WHERE id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, id);
+			st.executeQuery();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BilheteException(e);
+		}
 	}
 
 }

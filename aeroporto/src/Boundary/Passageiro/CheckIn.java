@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
+import Control.BilheteControl;
 import Entity.Bilhete;
+import Exception.BilheteException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +21,8 @@ import javafx.stage.Stage;
 
 public class CheckIn extends Application {
 
+	BilheteControl control = new BilheteControl();
+	
 	private TableView<Bilhete> tblBilhete;
 	
 	private TableColumn<Bilhete, String> tcId;
@@ -120,23 +124,6 @@ public class CheckIn extends Application {
 	private void preencherTabela() {
 	    List<Bilhete> bilhetes = new ArrayList<Bilhete>();	//já puxar os valores do getAll aqui
 
-	    //valores de teste -- começo ----------------- receber valores reais aqui
-	    Bilhete teste1 = new Bilhete();
-	    Bilhete teste2 = new Bilhete();
-	    
-	    teste1.setId(1);
-	    teste1.setNumero(1);
-	    teste1.setAssento("1");
-	    teste1.setSituacaoBilhete("RESERVADO");
-	    
-	    teste2.setId(2);
-	    teste2.setNumero(2);
-	    teste2.setAssento("2");
-	    teste2.setSituacaoBilhete("COMPRADO");
-	    
-	    bilhetes.add(teste1);
-	    bilhetes.add(teste2);
-	    //valores de teste -- fim
 	    
 	    for (Bilhete bilhete: bilhetes) {
 	    	if(bilhete.getSituacaoBilhete().equals("COMPRADO"))
@@ -167,6 +154,13 @@ public class CheckIn extends Application {
 	
 	private void realizarCheckIn(Bilhete bilhete) {
 		bilhete.setSituacaoBilhete("CONFIRMADO");
+		control.setBilhete(bilhete);
+		try {
+			control.atualizar();
+		} catch (BilheteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		preencherTabela();
 	}
 

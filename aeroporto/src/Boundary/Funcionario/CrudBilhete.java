@@ -1,7 +1,5 @@
 package Boundary.Funcionario;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import Boundary.Mensagem;
@@ -284,7 +282,15 @@ public class CrudBilhete extends Application{
 	}
 
 	private void realizarDelete(Long bilheteId) {
-		//puxar delete
+		Bilhete b = new Bilhete();
+		b.setId(bilheteId);
+		control.setBilhete(b);
+		try {
+			control.remover();
+		} catch(Exception ex) {
+			
+		}
+		preencherTabela();
 	}
 	
 }
